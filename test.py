@@ -1,4 +1,5 @@
 from met_aromatic import met_aromatic
 
-for item in range(0, 10):
-    print(met_aromatic(item))
+if __name__ == '__main__':
+    retval = met_aromatic("1rcy".encode())
+    print(retval)
