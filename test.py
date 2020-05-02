@@ -1,4 +1,4 @@
-from main_function import main_function_py
+from met_aromatic import met_aromatic
 
 for item in range(0, 10):
-    print(main_function_py(item))
+    print(met_aromatic(item))

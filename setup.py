@@ -4,7 +4,7 @@ from Cython.Distutils import build_ext
 
 EXTERNAL_MODULES = [
 	Extension(
-		"main_function",
+		"met_aromatic",
 		["met_aromatic_pyx.pyx", "met_aromatic.cpp"],
 		language="c++",
 	)
