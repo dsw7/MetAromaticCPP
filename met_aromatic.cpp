@@ -1,4 +1,4 @@
-#include "to_cython.hpp"
+#include "met_aromatic.h"
 
 void auxiliary_function(int *input_val, int *output_val) {
 	*output_val = *input_val * 5;

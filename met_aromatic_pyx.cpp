@@ -607,7 +607,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #define __PYX_HAVE__main_function
 #define __PYX_HAVE_API__main_function
 /* Early includes */
-#include "to_cython.hpp"
+#include "met_aromatic.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -816,7 +816,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "from_cython_to_python.pyx",
+  "met_aromatic_pyx.pyx",
 };
 
 /*--- Type declarations ---*/
@@ -1025,13 +1025,13 @@ static const char __pyx_k_input_val[] = "input_val";
 static const char __pyx_k_main_function[] = "main_function";
 static const char __pyx_k_main_function_py[] = "main_function_py";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_from_cython_to_python_pyx[] = "from_cython_to_python.pyx";
+static const char __pyx_k_met_aromatic_pyx_pyx[] = "met_aromatic_pyx.pyx";
 static PyObject *__pyx_n_s_cline_in_traceback;
-static PyObject *__pyx_kp_s_from_cython_to_python_pyx;
 static PyObject *__pyx_n_s_input_val;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_main_function;
 static PyObject *__pyx_n_s_main_function_py;
+static PyObject *__pyx_kp_s_met_aromatic_pyx_pyx;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_13main_function_main_function_py(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_input_val); /* proto */
@@ -1039,7 +1039,7 @@ static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
 
-/* "from_cython_to_python.pyx":6
+/* "met_aromatic_pyx.pyx":6
  *     int main_function(int input_val)
  * 
  * def main_function_py(int input_val):             # <<<<<<<<<<<<<<
@@ -1076,7 +1076,7 @@ static PyObject *__pyx_pf_13main_function_main_function_py(CYTHON_UNUSED PyObjec
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("main_function_py", 0);
 
-  /* "from_cython_to_python.pyx":7
+  /* "met_aromatic_pyx.pyx":7
  * 
  * def main_function_py(int input_val):
  *     return main_function(input_val)             # <<<<<<<<<<<<<<
@@ -1088,7 +1088,7 @@ static PyObject *__pyx_pf_13main_function_main_function_py(CYTHON_UNUSED PyObjec
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "from_cython_to_python.pyx":6
+  /* "met_aromatic_pyx.pyx":6
  *     int main_function(int input_val)
  * 
  * def main_function_py(int input_val):             # <<<<<<<<<<<<<<
@@ -1153,11 +1153,11 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
-  {&__pyx_kp_s_from_cython_to_python_pyx, __pyx_k_from_cython_to_python_pyx, sizeof(__pyx_k_from_cython_to_python_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_input_val, __pyx_k_input_val, sizeof(__pyx_k_input_val), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_main_function, __pyx_k_main_function, sizeof(__pyx_k_main_function), 0, 0, 1, 1},
   {&__pyx_n_s_main_function_py, __pyx_k_main_function_py, sizeof(__pyx_k_main_function_py), 0, 0, 1, 1},
+  {&__pyx_kp_s_met_aromatic_pyx_pyx, __pyx_k_met_aromatic_pyx_pyx, sizeof(__pyx_k_met_aromatic_pyx_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
@@ -1170,7 +1170,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "from_cython_to_python.pyx":6
+  /* "met_aromatic_pyx.pyx":6
  *     int main_function(int input_val)
  * 
  * def main_function_py(int input_val):             # <<<<<<<<<<<<<<
@@ -1179,7 +1179,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_s_input_val, __pyx_n_s_input_val); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_from_cython_to_python_pyx, __pyx_n_s_main_function_py, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_met_aromatic_pyx_pyx, __pyx_n_s_main_function_py, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1455,7 +1455,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "from_cython_to_python.pyx":6
+  /* "met_aromatic_pyx.pyx":6
  *     int main_function(int input_val)
  * 
  * def main_function_py(int input_val):             # <<<<<<<<<<<<<<
@@ -1466,10 +1466,10 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_main_function_py, __pyx_t_1) < 0) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "from_cython_to_python.pyx":1
+  /* "met_aromatic_pyx.pyx":1
  * # I'm not 100% if this is right...             # <<<<<<<<<<<<<<
  * 
- * cdef extern from "to_cython.hpp":
+ * cdef extern from "met_aromatic.h":
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
