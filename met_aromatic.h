@@ -6,4 +6,5 @@
 #include <iostream>
 
 int met_aromatic_cpp(std::string code);
+
 #endif

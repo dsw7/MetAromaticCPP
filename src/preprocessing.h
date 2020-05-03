@@ -11,7 +11,7 @@ const std::string SUB_PATTERN_PHE = "ATOM.*(CD1|CE1|CZ|CG|CD2|CE2)\\s*PHE\\s*";
 const std::string SUB_PATTERN_TYR = "ATOM.*(CD1|CE1|CZ|CG|CD2|CE2)\\s*TYR\\s*";
 const std::string SUB_PATTERN_TRP = "ATOM.*(CD2|CE3|CZ2|CH2|CZ3|CE2)\\s*TRP\\s*";
 
-void preprocess_data(std::string *input,
+bool preprocess_data(std::string *input,
 	                 std::vector<std::string> *met_data,
 	                 std::vector<std::string> *phe_data,
 	                 std::vector<std::string> *tyr_data,
@@ -38,6 +38,14 @@ void preprocess_data(std::string *input,
 			trp_data->push_back(line);
 	    }
 	}
+
+	if (met_data->size() == 0) {
+		return false;
+	}
+	else if ((phe_data->size() + tyr_data->size() + trp_data->size()) == 0) {
+		return false;
+	}
+	return true;
 }
 
 #endif
