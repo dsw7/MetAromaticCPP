@@ -1,8 +1,11 @@
 #ifndef MET_AROMATIC_H
 #define MET_AROMATIC_H
 
+#include <regex>
 #include <string>
+#include <vector>
 #include <iostream>
+#include <sstream>
 #include <curl/curl.h>
 
 void print_stdout(std::string msg);
