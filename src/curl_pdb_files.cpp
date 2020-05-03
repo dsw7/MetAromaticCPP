@@ -1,13 +1,9 @@
-#include "met_aromatic.h"
-#include "print.h"
 #include "curl_pdb_files.h"
-
 
 static size_t write_from_curl_to_string(void *contents, size_t size, size_t nmemb, void *userp) {
     ((std::string*)userp)->append((char*)contents, size * nmemb);
     return size * nmemb;
 }
-
 
 bool download_https_file(std::string filename, std::string *output) {
     bool rv = true;
@@ -35,23 +31,4 @@ bool download_https_file(std::string filename, std::string *output) {
  
     curl_global_cleanup();
     return rv;
-}
-
-
-int met_aromatic_cpp(std::string code) {
-	int retval = 0;
-
-	print_stdout("True");
-
-    std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
-    std::string raw_data;
-
-    if (download_https_file(url, &raw_data)) {
-        std::cout << raw_data << std::endl;
-    }
-    else {
-        retval = 1;
-    }
-
-	return retval;
 }

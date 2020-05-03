@@ -7,7 +7,8 @@ EXTERNAL_MODULES = [
         "met_aromatic",
         ["met_aromatic_pyx.pyx", "met_aromatic.cpp"],
         language="c++",
-        extra_link_args=["-lcurl"]  # add additional libs to link here
+        extra_link_args=["-lcurl"],  # add additional libs to link here
+        include_dirs=['src']         # path to header files
     )
 ]
 
