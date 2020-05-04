@@ -3,20 +3,6 @@
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
 
-
-#include <sstream>
-std::vector<std::string> split(std::string str)
-{
-    // splits a string by whitespace
-    std::vector<std::string> result;
-    std::istringstream iss(str);
-    for (std::string s; iss >> s; ) {
-        result.push_back(s);
-    }
-    return result;
-}
-
-
 int met_aromatic_cpp(std::string code, std::string chain) {
 	/* ---- download file ---- */
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
@@ -27,7 +13,7 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     }
 
 	/* ---- isolate rows of interest ---- */
-    std::vector<std::string> met_data;
+    std::vector<std::vector<std::string>> met_data;
     std::vector<std::string> phe_data;
     std::vector<std::string> tyr_data;
     std::vector<std::string> trp_data;
@@ -36,11 +22,15 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-    /*
-	for (std::vector<std::string>::const_iterator i = met_data.begin(); i != met_data.end(); ++i) {
-	    std::cout << *i << std::endl;
-	}
 
+    for (unsigned int i = 0; i < met_data.size(); ++i) {
+        for (unsigned int j = 0; j < met_data[i].size(); ++j) {
+            std::cout << met_data[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    /*
 	for (std::vector<std::string>::const_iterator i = phe_data.begin(); i != phe_data.end(); ++i) {
 	    std::cout << *i << std::endl;
 	}
