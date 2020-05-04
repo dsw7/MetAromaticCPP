@@ -5,6 +5,6 @@
 #include <vector>
 #include <iostream>
 
-int met_aromatic_cpp(std::string code);
+int met_aromatic_cpp(std::string code, std::string chain);
 
 #endif

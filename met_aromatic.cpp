@@ -17,11 +17,12 @@ std::vector<std::string> split(std::string str)
 }
 
 
-int met_aromatic_cpp(std::string code) {
+int met_aromatic_cpp(std::string code, std::string chain) {
 	/* ---- download file ---- */
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
+        print_stderr("PDB entry does not exist.");
         return EXIT_FAILURE;
     }
 
@@ -30,10 +31,12 @@ int met_aromatic_cpp(std::string code) {
     std::vector<std::string> phe_data;
     std::vector<std::string> tyr_data;
     std::vector<std::string> trp_data;
-    if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, "A")) {
+    if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
+        print_stderr("No MET residues or no PHE/TYR/TRP residues.");
     	return EXIT_FAILURE;
     }
 
+    /*
 	for (std::vector<std::string>::const_iterator i = met_data.begin(); i != met_data.end(); ++i) {
 	    std::cout << *i << std::endl;
 	}
@@ -49,6 +52,7 @@ int met_aromatic_cpp(std::string code) {
 	for (std::vector<std::string>::const_iterator i = trp_data.begin(); i != trp_data.end(); ++i) {
 	    std::cout << *i << std::endl;
 	}
-	
+	*/
+
 	return EXIT_SUCCESS;
 }
