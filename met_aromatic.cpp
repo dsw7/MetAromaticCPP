@@ -3,6 +3,17 @@
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
 
+
+void print_data(std::vector<std::vector<std::string>> data) {
+    for (unsigned int i = 0; i < data.size(); ++i) {
+        for (unsigned int j = 0; j < data[i].size(); ++j) {
+            std::cout << data[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }    
+}
+
+
 int met_aromatic_cpp(std::string code, std::string chain) {
 	/* ---- download file ---- */
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
@@ -22,27 +33,10 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-
-    for (unsigned int i = 0; i < met_data.size(); ++i) {
-        for (unsigned int j = 0; j < met_data[i].size(); ++j) {
-            std::cout << met_data[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    /*
-	for (std::vector<std::string>::const_iterator i = phe_data.begin(); i != phe_data.end(); ++i) {
-	    std::cout << *i << std::endl;
-	}
-
-	for (std::vector<std::string>::const_iterator i = tyr_data.begin(); i != tyr_data.end(); ++i) {
-	    std::cout << *i << std::endl;
-	}
-
-	for (std::vector<std::string>::const_iterator i = trp_data.begin(); i != trp_data.end(); ++i) {
-	    std::cout << *i << std::endl;
-	}
-	*/
+    print_data(met_data);
+    print_data(phe_data);
+    print_data(tyr_data);
+    print_data(trp_data);
 
 	return EXIT_SUCCESS;
 }
