@@ -17,9 +17,9 @@ const unsigned int IDX_X_COORD = 6;
 const unsigned int IDX_Y_COORD = 7;
 const unsigned int IDX_Z_COORD = 8;
 
-std::vector<std::string> get_relevant_data(std::string line) {
+std::vector<std::string> get_relevant_data(std::string *line) {
     std::vector<std::string> split_by_whitespace;
-    std::istringstream iss(line);
+    std::istringstream iss(*line);
     for (std::string s; iss >> s;) {
         split_by_whitespace.push_back(s);
     }
@@ -48,16 +48,16 @@ bool preprocess_data(std::string *input,
 
 	for (std::string line; getline(iss, line);) {
 	    if (regex_search(line, pattern_met)) {
-			met_data->push_back(get_relevant_data(line));
+			met_data->push_back(get_relevant_data(&line));
 	    }
 	    else if (regex_search(line, pattern_phe)) {
-			phe_data->push_back(get_relevant_data(line));
+			phe_data->push_back(get_relevant_data(&line));
 	    }
 	    else if (regex_search(line, pattern_tyr)) {
-			tyr_data->push_back(get_relevant_data(line));
+			tyr_data->push_back(get_relevant_data(&line));
 	    }
 	    else if (regex_search(line, pattern_trp)) {
-			trp_data->push_back(get_relevant_data(line));
+			trp_data->push_back(get_relevant_data(&line));
 	    }
 	}
 
