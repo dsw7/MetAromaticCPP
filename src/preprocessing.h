@@ -35,9 +35,9 @@ std::vector<std::string> get_relevant_data(std::string line) {
 
 bool preprocess_data(std::string *input,
 	                 std::vector<std::vector<std::string>> *met_data,
-	                 std::vector<std::string> *phe_data,
-	                 std::vector<std::string> *tyr_data,
-	                 std::vector<std::string> *trp_data,
+	                 std::vector<std::vector<std::string>> *phe_data,
+	                 std::vector<std::vector<std::string>> *tyr_data,
+	                 std::vector<std::vector<std::string>> *trp_data,
 	                 std::string chain) {
 	// need to break at ENDMDL in the curl stage
 	std::istringstream iss(*input);
@@ -51,13 +51,13 @@ bool preprocess_data(std::string *input,
 			met_data->push_back(get_relevant_data(line));
 	    }
 	    else if (regex_search(line, pattern_phe)) {
-			phe_data->push_back(line);
+			phe_data->push_back(get_relevant_data(line));
 	    }
 	    else if (regex_search(line, pattern_tyr)) {
-			tyr_data->push_back(line);
+			tyr_data->push_back(get_relevant_data(line));
 	    }
 	    else if (regex_search(line, pattern_trp)) {
-			trp_data->push_back(line);
+			trp_data->push_back(get_relevant_data(line));
 	    }
 	}
 

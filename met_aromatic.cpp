@@ -14,9 +14,9 @@ int met_aromatic_cpp(std::string code, std::string chain) {
 
 	/* ---- isolate rows of interest ---- */
     std::vector<std::vector<std::string>> met_data;
-    std::vector<std::string> phe_data;
-    std::vector<std::string> tyr_data;
-    std::vector<std::string> trp_data;
+    std::vector<std::vector<std::string>> phe_data;
+    std::vector<std::vector<std::string>> tyr_data;
+    std::vector<std::vector<std::string>> trp_data;
     if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
         print_stderr("No MET residues or no PHE/TYR/TRP residues.");
     	return EXIT_FAILURE;
