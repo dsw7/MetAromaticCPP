@@ -2,6 +2,7 @@
 #include "print.h"
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
+#include "get_aromatic_midpoints.h"
 
 
 void print_data(std::vector<std::map<std::string, std::string>> data) {
@@ -15,20 +16,6 @@ void print_data(std::vector<std::map<std::string, std::string>> data) {
         std::cout << std::endl;
     }    
 }
-
-
-#include <set>
-void get_midpoints(std::vector<std::map<std::string, std::string>> *data) {
-    std::set<std::string> res;
-    for (std::vector<std::map<std::string, std::string>>::iterator it = data->begin(); it != data->end(); ++it) {
-        res.insert(it->at("res_pos"));
-    }
-
-    for (std::set<std::string>::iterator it = res.begin(); it != res.end(); ++it) {
-        std::cout << *it << std::endl;
-    }
-}
-
 
 
 int met_aromatic_cpp(std::string code, std::string chain) {
@@ -50,12 +37,7 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-    //print_data(met_data);
-    //print_data(phe_data);
-    //print_data(tyr_data);
-    //print_data(trp_data);
-    get_midpoints(&trp_data);
-
+    get_trp_midpoints(&trp_data);
 
 	return EXIT_SUCCESS;
 }
