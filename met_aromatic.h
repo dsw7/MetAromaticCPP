@@ -1,6 +1,7 @@
 #ifndef MET_AROMATIC_H
 #define MET_AROMATIC_H
 
+#include <map>
 #include <string>
 #include <vector>
 #include <iostream>

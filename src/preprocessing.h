@@ -1,10 +1,11 @@
 #ifndef PREPROCESSING_H
 #define PREPROCESSING_H
-
+#include <map>
 #include <regex>
 #include <string>
 #include <vector>
 #include <sstream>
+
 
 const std::string SUB_PATTERN_MET = "ATOM.*(CG|CE|SD)\\s*MET\\s*";
 const std::string SUB_PATTERN_PHE = "ATOM.*(CD1|CE1|CZ|CG|CD2|CE2)\\s*PHE\\s*";
@@ -17,27 +18,29 @@ const unsigned int IDX_X_COORD = 6;
 const unsigned int IDX_Y_COORD = 7;
 const unsigned int IDX_Z_COORD = 8;
 
-std::vector<std::string> get_relevant_data(std::string *line) {
+
+std::map<std::string, std::string> get_relevant_data(std::string *line) {
     std::vector<std::string> split_by_whitespace;
     std::istringstream iss(*line);
     for (std::string s; iss >> s;) {
         split_by_whitespace.push_back(s);
     }
-    std::vector<std::string> result;
-    result.push_back(split_by_whitespace[IDX_ATOM_DELIMITER]);
-    result.push_back(split_by_whitespace[IDX_CHAIN]);
-    result.push_back(split_by_whitespace[IDX_RESIDUE_POSITION]);
-    result.push_back(split_by_whitespace[IDX_X_COORD]);
-    result.push_back(split_by_whitespace[IDX_Y_COORD]);
-    result.push_back(split_by_whitespace[IDX_Z_COORD]);
-    return result;
+    std::map<std::string, std::string> map_relevant_data;
+	map_relevant_data["atom"] = split_by_whitespace[IDX_ATOM_DELIMITER];
+	map_relevant_data["chain"] = split_by_whitespace[IDX_CHAIN];
+	map_relevant_data["res_pos"] = split_by_whitespace[IDX_RESIDUE_POSITION];
+	map_relevant_data["x_coord"] = split_by_whitespace[IDX_X_COORD];
+	map_relevant_data["y_coord"] = split_by_whitespace[IDX_Y_COORD];
+	map_relevant_data["z_coord"] = split_by_whitespace[IDX_Z_COORD];
+    return map_relevant_data;
 }
 
+
 bool preprocess_data(std::string *input,
-	                 std::vector<std::vector<std::string>> *met_data,
-	                 std::vector<std::vector<std::string>> *phe_data,
-	                 std::vector<std::vector<std::string>> *tyr_data,
-	                 std::vector<std::vector<std::string>> *trp_data,
+	                 std::vector<std::map<std::string, std::string>> *met_data,
+	                 std::vector<std::map<std::string, std::string>> *phe_data,
+	                 std::vector<std::map<std::string, std::string>> *tyr_data,
+	                 std::vector<std::map<std::string, std::string>> *trp_data,
 	                 std::string chain) {
 	// need to break at ENDMDL in the curl stage
 	std::istringstream iss(*input);
