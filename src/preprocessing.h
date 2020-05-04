@@ -1,6 +1,5 @@
 #ifndef PREPROCESSING_H
 #define PREPROCESSING_H
-#include <map>
 #include <regex>
 #include <string>
 #include <vector>
@@ -19,28 +18,38 @@ const unsigned int IDX_Y_COORD = 7;
 const unsigned int IDX_Z_COORD = 8;
 
 
-std::map<std::string, std::string> get_relevant_data(std::string *line) {
+struct preprocessed {
+	std::string atom;
+	std::string chain;
+	int residue_position;
+	float x_coord;
+	float y_coord;
+	float z_coord;
+};
+
+
+preprocessed get_relevant_data(std::string *line) {
     std::vector<std::string> split_by_whitespace;
     std::istringstream iss(*line);
     for (std::string s; iss >> s;) {
         split_by_whitespace.push_back(s);
     }
-    std::map<std::string, std::string> map_relevant_data;
-	map_relevant_data["atom"] = split_by_whitespace[IDX_ATOM_DELIMITER];
-	map_relevant_data["chain"] = split_by_whitespace[IDX_CHAIN];
-	map_relevant_data["res_pos"] = split_by_whitespace[IDX_RESIDUE_POSITION];
-	map_relevant_data["x_coord"] = split_by_whitespace[IDX_X_COORD];
-	map_relevant_data["y_coord"] = split_by_whitespace[IDX_Y_COORD];
-	map_relevant_data["z_coord"] = split_by_whitespace[IDX_Z_COORD];
+    preprocessed map_relevant_data;
+	map_relevant_data.atom = split_by_whitespace[IDX_ATOM_DELIMITER];
+	map_relevant_data.chain = split_by_whitespace[IDX_CHAIN];
+	map_relevant_data.residue_position = std::stoi(split_by_whitespace[IDX_RESIDUE_POSITION]);
+	map_relevant_data.x_coord = std::stof(split_by_whitespace[IDX_X_COORD]);
+	map_relevant_data.y_coord = std::stof(split_by_whitespace[IDX_Y_COORD]);
+	map_relevant_data.z_coord = std::stof(split_by_whitespace[IDX_Z_COORD]);
     return map_relevant_data;
 }
 
 
 bool preprocess_data(std::string *input,
-	                 std::vector<std::map<std::string, std::string>> *met_data,
-	                 std::vector<std::map<std::string, std::string>> *phe_data,
-	                 std::vector<std::map<std::string, std::string>> *tyr_data,
-	                 std::vector<std::map<std::string, std::string>> *trp_data,
+	                 std::vector<preprocessed> *met_data,
+	                 std::vector<preprocessed> *phe_data,
+	                 std::vector<preprocessed> *tyr_data,
+	                 std::vector<preprocessed> *trp_data,
 	                 std::string chain) {
 	// need to break at ENDMDL in the curl stage
 	std::istringstream iss(*input);
