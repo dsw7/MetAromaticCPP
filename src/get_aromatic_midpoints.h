@@ -25,24 +25,21 @@ const std::map<std::string, std::string> MAP_ATOMS_TYR = {
     {"CD1", "F"}
 };
 
+const std::map<std::string, std::string> MAP_ATOMS_TRP = {
+    {"CD2", "A"},
+    {"CE3", "B"},
+    {"CZ3", "C"},
+    {"CH2", "D"},
+    {"CZ2", "E"},
+    {"CE2", "F"}
+};
 
-/*
-const std::map<std::string, std::string> MAP_ATOMS_TRP;
-MAP_ATOMS_TRP["CD2"] = std::string("A");
-MAP_ATOMS_TRP["CE3"] = std::string("B");
-MAP_ATOMS_TRP["CZ3"] = std::string("C");
-MAP_ATOMS_TRP["CH2"] = std::string("D");
-MAP_ATOMS_TRP["CZ2"] = std::string("E");
-MAP_ATOMS_TRP["CE2"] = std::string("F");
-}
-*/
-
-bool compare_by_special_key(const preprocessed &start, const preprocessed &end) {
+bool compare_by_alphabetic_character(const preprocessed &start, const preprocessed &end) {
     return start.atom < end.atom;
 }
 
-void get_trp_midpoints(std::vector<preprocessed> *trp_data) {
-    // swap atom delimiters with sortable alphabetic characters
+void get_phe_midpoints(std::vector<preprocessed> *trp_data) {
+    // swap atom delimiters with alphabetic characters for sorting
     for (std::vector<preprocessed>::iterator it = trp_data->begin(); it != trp_data->end(); ++it) {
         it->atom = MAP_ATOMS_PHE.at(it->atom);
     }
@@ -54,17 +51,23 @@ void get_trp_midpoints(std::vector<preprocessed> *trp_data) {
     }
 
     for (std::set<int>::iterator it_res = residue_positions.begin(); it_res != residue_positions.end(); ++it_res) {
-        std::cout << *it_res << std::endl;
-
+        // group data according to unique residues
+        std::vector<preprocessed> group;
         for (std::vector<preprocessed>::iterator it = trp_data->begin(); it != trp_data->end(); ++it) {
             if(it->residue_position == *it_res) {
-                std::cout << it->residue_position << " " << it->atom << std::endl;
+                group.push_back(*it);
             }
         }
 
+        // sort according to alphabetic characters
+        std::sort(group.begin(), group.end(), compare_by_alphabetic_character);
+
+        // need to get hexagon midpoints here
+        for (std::vector<preprocessed>::iterator it = group.begin(); it != group.end(); ++it) {
+            std::cout << it->residue_position << " " << it->atom << std::endl;
+        }
         std::cout << std::endl;
     }
-
 }
 
 #endif

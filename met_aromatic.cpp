@@ -24,7 +24,7 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-    get_trp_midpoints(&phe_data);
+    get_phe_midpoints(&phe_data);
 
 	return EXIT_SUCCESS;
 }
