@@ -3,6 +3,7 @@
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
 #include "get_aromatic_midpoints.h"
+#include "distance_condition.h"
 
 
 int met_aromatic_cpp(std::string code, std::string chain) {
@@ -32,17 +33,10 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
     get_trp_midpoints(&trp_data, &trp_midpoints);
 
-    for (std::vector<midpoints>::iterator it = trp_midpoints.begin(); it != trp_midpoints.end(); ++it) {
-        std::cout << it->chain << " ";
-        std::cout << it->residue << " ";
-        std::cout << it->residue_position << " ";
-        std::cout << it->x_coord << " ";
-        std::cout << it->y_coord << " ";
-        std::cout << it->z_coord << " ";
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
-
+    // get closely spaced met-aromatics
+    apply_distance_condition(&met_data, &phe_midpoints);
+    apply_distance_condition(&met_data, &tyr_midpoints);
+    apply_distance_condition(&met_data, &trp_midpoints);
 
 	return EXIT_SUCCESS;
 }
