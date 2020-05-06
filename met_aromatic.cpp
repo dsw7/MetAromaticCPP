@@ -24,7 +24,22 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-    get_phe_midpoints(&phe_data);
+
+    std::vector<midpoints> phe_midpoints;
+
+    get_phe_midpoints(&phe_data, &phe_midpoints);
+
+    for (std::vector<midpoints>::iterator it = phe_midpoints.begin(); it != phe_midpoints.end(); ++it) {
+        std::cout << it->chain << " ";
+        std::cout << it->residue << " ";
+        std::cout << it->residue_position << " ";
+        std::cout << it->x_coord << " ";
+        std::cout << it->y_coord << " ";
+        std::cout << it->z_coord << " ";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+
 
 	return EXIT_SUCCESS;
 }
