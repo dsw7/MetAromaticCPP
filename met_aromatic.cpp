@@ -6,7 +6,7 @@
 
 
 int met_aromatic_cpp(std::string code, std::string chain) {
-	/* ---- download file ---- */
+    // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
@@ -14,7 +14,7 @@ int met_aromatic_cpp(std::string code, std::string chain) {
         return EXIT_FAILURE;
     }
 
-	/* ---- isolate rows of interest ---- */
+	// isolate only relevant data from pdb file lines
     std::vector<preprocessed> met_data;
     std::vector<preprocessed> phe_data;
     std::vector<preprocessed> tyr_data;
@@ -24,12 +24,13 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     	return EXIT_FAILURE;
     }
 
-
+    // get aromatic residue midpoints
     std::vector<midpoints> phe_midpoints;
-
+    std::vector<midpoints> tyr_midpoints;
     get_phe_midpoints(&phe_data, &phe_midpoints);
+    get_tyr_midpoints(&tyr_data, &tyr_midpoints);
 
-    for (std::vector<midpoints>::iterator it = phe_midpoints.begin(); it != phe_midpoints.end(); ++it) {
+    for (std::vector<midpoints>::iterator it = tyr_midpoints.begin(); it != tyr_midpoints.end(); ++it) {
         std::cout << it->chain << " ";
         std::cout << it->residue << " ";
         std::cout << it->residue_position << " ";
