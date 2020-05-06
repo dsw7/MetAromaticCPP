@@ -27,10 +27,12 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     // get aromatic residue midpoints
     std::vector<midpoints> phe_midpoints;
     std::vector<midpoints> tyr_midpoints;
+    std::vector<midpoints> trp_midpoints;
     get_phe_midpoints(&phe_data, &phe_midpoints);
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
+    get_trp_midpoints(&trp_data, &trp_midpoints);
 
-    for (std::vector<midpoints>::iterator it = tyr_midpoints.begin(); it != tyr_midpoints.end(); ++it) {
+    for (std::vector<midpoints>::iterator it = trp_midpoints.begin(); it != trp_midpoints.end(); ++it) {
         std::cout << it->chain << " ";
         std::cout << it->residue << " ";
         std::cout << it->residue_position << " ";
