@@ -1,11 +1,10 @@
 #ifndef GET_AROMATIC_MIDPOINTS_H
 #define GET_AROMATIC_MIDPOINTS_H
-
 #include <set>
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include "preprocessing.h"
+#include "structs.h"
 
 const std::map<std::string, std::string> MAP_ATOMS_PHE = {
     {"CG", "A"},
@@ -33,15 +32,6 @@ const std::map<std::string, std::string> MAP_ATOMS_TRP = {
     {"CZ2", "E"},
     {"CE2", "F"}
 };
-
-
-struct midpoints {
-	int residue_position;
-	float x_coord;
-	float y_coord;
-	float z_coord;
-};	
-
 
 void get_hexagon_midpoints(std::vector<preprocessed> sorted_group, std::vector<midpoints> *results) {
 	std::vector<preprocessed> frameshift = sorted_group;

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "structs.h"
 
 
 const std::string SUB_PATTERN_MET = "ATOM.*(CG|CE|SD)\\s*MET\\s*";
@@ -16,16 +17,6 @@ const unsigned int IDX_RESIDUE_POSITION = 5;
 const unsigned int IDX_X_COORD = 6;
 const unsigned int IDX_Y_COORD = 7;
 const unsigned int IDX_Z_COORD = 8;
-
-
-struct preprocessed {
-	std::string atom;
-	std::string chain;
-	int residue_position;
-	float x_coord;
-	float y_coord;
-	float z_coord;
-};
 
 
 preprocessed get_relevant_data(std::string *line) {
