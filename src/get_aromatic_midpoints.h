@@ -35,17 +35,28 @@ const std::map<std::string, std::string> MAP_ATOMS_TRP = {
 };
 
 
-void get_hexagon_midpoints(std::vector<preprocessed> sorted_group) {
+struct midpoints {
+	int residue_position;
+	float x_coord;
+	float y_coord;
+	float z_coord;
+};	
+
+
+void get_hexagon_midpoints(std::vector<preprocessed> sorted_group, std::vector<midpoints> *results) {
 	std::vector<preprocessed> frameshift = sorted_group;
 	frameshift.insert(frameshift.begin(), frameshift.back());
 	frameshift.pop_back();
 
 	for (unsigned int i = 0; i < sorted_group.size(); i++) {
-		std::cout << sorted_group[i].x_coord << " " << frameshift[i].x_coord << std::endl;
+		midpoints mp;
+		mp.residue_position = sorted_group[i].residue_position;
+		mp.x_coord = 0.5 * (sorted_group[i].x_coord + frameshift[i].x_coord);
+		mp.y_coord = 0.5 * (sorted_group[i].y_coord + frameshift[i].y_coord);
+		mp.z_coord = 0.5 * (sorted_group[i].z_coord + frameshift[i].z_coord);
+		results->push_back(mp);
 	}
-    std::cout << std::endl;
 }
-
 
 bool compare_by_alphabetic_character(const preprocessed &start, const preprocessed &end) {
     return start.atom < end.atom;
