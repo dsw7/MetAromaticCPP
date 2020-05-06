@@ -74,6 +74,7 @@ void get_phe_midpoints(std::vector<preprocessed> *preprocessed_data) {
         residue_positions.insert(preprocessed_data->at(i).residue_position);
     }
 
+    std::vector<midpoints> mp;
     for (std::set<int>::iterator it_res = residue_positions.begin(); it_res != residue_positions.end(); ++it_res) {
         // group data according to unique residues
         std::vector<preprocessed> group;
@@ -87,14 +88,13 @@ void get_phe_midpoints(std::vector<preprocessed> *preprocessed_data) {
         std::sort(group.begin(), group.end(), compare_by_alphabetic_character);
 
         // need to get hexagon midpoints here
-        get_hexagon_midpoints(group);
-        /*
-        for (std::vector<preprocessed>::iterator it = group.begin(); it != group.end(); ++it) {
-            std::cout << it->residue_position << " " << it->atom << std::endl;
-        }
-        std::cout << std::endl;
-        */
+        get_hexagon_midpoints(group, &mp);
     }
+    
+    for (std::vector<midpoints>::iterator it = mp.begin(); it != mp.end(); ++it) {
+        std::cout << it->x_coord << " " << it->y_coord << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 #endif
