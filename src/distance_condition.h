@@ -15,7 +15,8 @@ void norm_vector(std::vector<float> *input_vec, float *norm) {
 
 
 void apply_distance_condition(std::vector<preprocessed> *met_data,
-                              std::vector<midpoints> *midpoint_data) {
+                              std::vector<midpoints> *midpoint_data,
+                              float cutoff) {
     for (std::vector<preprocessed>::iterator it_sd = met_data->begin(); it_sd != met_data->end(); ++it_sd) {
         if (it_sd->atom == "SD") {
             for (std::vector<midpoints>::iterator it_mp = midpoint_data->begin(); it_mp != midpoint_data->end(); ++it_mp) {
@@ -26,10 +27,12 @@ void apply_distance_condition(std::vector<preprocessed> *met_data,
                     it_mp->z_coord - it_sd->z_coord
                 };
                 norm_vector(&vector_v, &norm);
-                std::cout << it_sd->residue_position << " ";
-                std::cout << it_mp->residue_position << " ";
-                std::cout << it_mp->residue << " ";
-                std::cout << norm << std::endl;
+                if (norm <= cutoff) {
+                    std::cout << it_sd->residue_position << " ";
+                    std::cout << it_mp->residue_position << " ";
+                    std::cout << it_mp->residue << " ";
+                    std::cout << norm << std::endl;
+                }
             }
         }
     }

@@ -6,7 +6,7 @@
 #include "distance_condition.h"
 
 
-int met_aromatic_cpp(std::string code, std::string chain) {
+int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance) {
     // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
@@ -34,9 +34,9 @@ int met_aromatic_cpp(std::string code, std::string chain) {
     get_trp_midpoints(&trp_data, &trp_midpoints);
 
     // get closely spaced met-aromatics
-    apply_distance_condition(&met_data, &phe_midpoints);
-    apply_distance_condition(&met_data, &tyr_midpoints);
-    apply_distance_condition(&met_data, &trp_midpoints);
+    apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
+    apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
+    apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
 
 	return EXIT_SUCCESS;
 }
