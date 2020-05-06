@@ -40,6 +40,8 @@ void get_hexagon_midpoints(std::vector<preprocessed> sorted_group, std::vector<m
 
 	for (unsigned int i = 0; i < sorted_group.size(); i++) {
 		midpoints mp;
+        mp.chain = sorted_group[i].chain;
+        mp.residue = sorted_group[i].residue;
 		mp.residue_position = sorted_group[i].residue_position;
 		mp.x_coord = 0.5 * (sorted_group[i].x_coord + frameshift[i].x_coord);
 		mp.y_coord = 0.5 * (sorted_group[i].y_coord + frameshift[i].y_coord);
@@ -82,7 +84,13 @@ void get_phe_midpoints(std::vector<preprocessed> *preprocessed_data) {
     }
     
     for (std::vector<midpoints>::iterator it = mp.begin(); it != mp.end(); ++it) {
-        std::cout << it->x_coord << " " << it->y_coord << std::endl;
+        std::cout << it->chain << " ";
+        std::cout << it->residue << " ";
+        std::cout << it->residue_position << " ";
+        std::cout << it->x_coord << " ";
+        std::cout << it->y_coord << " ";
+        std::cout << it->z_coord << " ";
+        std::cout << std::endl;
     }
     std::cout << std::endl;
 }
