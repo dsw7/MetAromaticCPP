@@ -84,19 +84,16 @@ void get_phe_midpoints(std::vector<preprocessed> *preprocessed_data, std::vector
 }
 
 void get_tyr_midpoints(std::vector<preprocessed> *preprocessed_data, std::vector<midpoints> *tyr_midpoints) {
-    // swap atom delimiters with alphabetic characters for sorting
     for (std::vector<preprocessed>::iterator it = preprocessed_data->begin(); it != preprocessed_data->end(); ++it) {
         it->atom = MAP_ATOMS_TYR.at(it->atom);
     }
 
-    // get unique residue positions
     std::set<int> residue_positions;
     for(unsigned int i = 0; i < preprocessed_data->size(); ++i) {
         residue_positions.insert(preprocessed_data->at(i).residue_position);
     }
 
     for (std::set<int>::iterator it_res = residue_positions.begin(); it_res != residue_positions.end(); ++it_res) {
-        // group data according to unique residues
         std::vector<preprocessed> group;
         for (std::vector<preprocessed>::iterator it = preprocessed_data->begin(); it != preprocessed_data->end(); ++it) {
             if(it->residue_position == *it_res) {
@@ -104,28 +101,22 @@ void get_tyr_midpoints(std::vector<preprocessed> *preprocessed_data, std::vector
             }
         }
 
-        // sort according to alphabetic characters
         std::sort(group.begin(), group.end(), compare_by_alphabetic_character);
-
-        // need to get hexagon midpoints here
         get_hexagon_midpoints(&group, tyr_midpoints);
     }
 }
 
 void get_trp_midpoints(std::vector<preprocessed> *preprocessed_data, std::vector<midpoints> *trp_midpoints) {
-    // swap atom delimiters with alphabetic characters for sorting
     for (std::vector<preprocessed>::iterator it = preprocessed_data->begin(); it != preprocessed_data->end(); ++it) {
         it->atom = MAP_ATOMS_TRP.at(it->atom);
     }
 
-    // get unique residue positions
     std::set<int> residue_positions;
     for(unsigned int i = 0; i < preprocessed_data->size(); ++i) {
         residue_positions.insert(preprocessed_data->at(i).residue_position);
     }
 
     for (std::set<int>::iterator it_res = residue_positions.begin(); it_res != residue_positions.end(); ++it_res) {
-        // group data according to unique residues
         std::vector<preprocessed> group;
         for (std::vector<preprocessed>::iterator it = preprocessed_data->begin(); it != preprocessed_data->end(); ++it) {
             if(it->residue_position == *it_res) {
@@ -133,10 +124,7 @@ void get_trp_midpoints(std::vector<preprocessed> *preprocessed_data, std::vector
             }
         }
 
-        // sort according to alphabetic characters
         std::sort(group.begin(), group.end(), compare_by_alphabetic_character);
-
-        // need to get hexagon midpoints here
         get_hexagon_midpoints(&group, trp_midpoints);
     }
 }

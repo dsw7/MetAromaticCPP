@@ -2,6 +2,7 @@
 #include "print.h"
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
+#include "precompute_lone_pairs.h"
 #include "precompute_aromatic_midpoints.h"
 #include "distance_condition.h"
 
@@ -33,10 +34,13 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
     get_trp_midpoints(&trp_data, &trp_midpoints);
 
+    // get lone pairs
+ 	get_lone_pairs(&met_data);
+
     // get closely spaced met-aromatics
-    apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
-    apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
-    apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
 
 	return EXIT_SUCCESS;
 }
