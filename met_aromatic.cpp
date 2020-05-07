@@ -2,7 +2,7 @@
 #include "print.h"
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
-#include "get_aromatic_midpoints.h"
+#include "precompute_aromatic_midpoints.h"
 #include "distance_condition.h"
 
 
