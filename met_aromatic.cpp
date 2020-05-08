@@ -5,6 +5,7 @@
 #include "precompute_lone_pairs.h"
 #include "precompute_aromatic_midpoints.h"
 #include "distance_condition.h"
+#include "debug.h"
 
 
 int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance) {
@@ -26,6 +27,8 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     	return EXIT_FAILURE;
     }
 
+    debug_preprocessed(&trp_data);
+
     // get aromatic residue midpoints
     std::vector<midpoints> phe_midpoints;
     std::vector<midpoints> tyr_midpoints;
@@ -33,6 +36,8 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     get_phe_midpoints(&phe_data, &phe_midpoints);
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
     get_trp_midpoints(&trp_data, &trp_midpoints);
+
+    debug_midpoints(&trp_midpoints);
 
     // get lone pairs
     std::vector<lone_pairs> met_lone_pairs;
