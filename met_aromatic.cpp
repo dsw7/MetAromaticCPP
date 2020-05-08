@@ -43,6 +43,8 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     std::vector<lone_pairs> met_lone_pairs;
  	get_lone_pairs(&met_data, &met_lone_pairs);
 
+    debug_lone_pairs(&met_lone_pairs);
+
     // apply met aromatic conditions here
     // TODO: replace &met_data with &met_lone_pairs here
     // TODO: apply_distance_condition -> apply_cutoff_conditions

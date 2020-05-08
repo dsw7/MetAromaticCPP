@@ -25,7 +25,7 @@ struct lone_pairs {
     std::vector<float> vector_a;
     std::vector<float> vector_g;
     std::vector<float> coord_sd;
-    std::string residue_position;
+    int residue_position;
 };
 
 #endif
