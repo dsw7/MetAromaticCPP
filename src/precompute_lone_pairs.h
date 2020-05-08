@@ -6,7 +6,7 @@
 #include "structs.h"
 #include "cross_product_method.h"
 
-void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
+void get_lone_pairs_from_group(std::vector<preprocessed> *group, int residue_position, lone_pairs *lone_pair_results) {
     std::vector<float> coord_cg, coord_sd, coord_ce;
     for (std::vector<preprocessed>::iterator it = group->begin(); it != group->end(); ++it) {
         if (it->atom == "CG") {
@@ -21,12 +21,17 @@ void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
     }
 
     std::vector<float> vector_a, vector_g;
-    CrossProductMethod lone_pairs(&coord_cg, &coord_sd, &coord_ce);
-    lone_pairs.get_vector_a(&vector_a);
-    lone_pairs.get_vector_g(&vector_g);
+    CrossProductMethod cp_lone_pairs(&coord_cg, &coord_sd, &coord_ce);
+    cp_lone_pairs.get_vector_a(&vector_a);
+    cp_lone_pairs.get_vector_g(&vector_g);
+
+    lone_pair_results->vector_a = vector_a;
+    lone_pair_results->vector_g = vector_g;
+    lone_pair_results->coord_sd = coord_sd;
+    lone_pair_results->residue_position = residue_position;
 }
 
-void get_lone_pairs(std::vector<preprocessed> *met_data) {
+void get_lone_pairs(std::vector<preprocessed> *met_data, std::vector<lone_pairs> *met_lone_pairs) {
     // get unique residue positions
     std::set<int> residue_positions;
 	for (std::vector<preprocessed>::iterator it = met_data->begin(); it != met_data->end(); ++it) {
@@ -42,7 +47,10 @@ void get_lone_pairs(std::vector<preprocessed> *met_data) {
             }
         }
 
-        get_lone_pairs_from_group(&group);
+        // get the lone pairs from the groups
+        lone_pairs lone_pair_results;
+        get_lone_pairs_from_group(&group, *it_res, &lone_pair_results);
+        met_lone_pairs->push_back(lone_pair_results);
     }
 }
 
