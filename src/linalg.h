@@ -50,7 +50,7 @@ namespace linalg {
 			vec_a->at(1) * vec_b->at(2) - vec_a->at(2) * vec_b->at(1),
 			vec_a->at(0) * vec_b->at(2) - vec_a->at(2) * vec_b->at(0),
 			vec_a->at(0) * vec_b->at(1) - vec_a->at(1) * vec_b->at(0)
-		}
+		};
 	}
 }
 
