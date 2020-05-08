@@ -14,7 +14,7 @@ void apply_distance_condition(std::vector<preprocessed> *met_data, std::vector<m
                     it_mp->y_coord - it_sd->y_coord,
                     it_mp->z_coord - it_sd->z_coord
                 };
-                norm_vector(&vector_v, &norm);
+                linalg::vector_norm(&vector_v, &norm);
                 if (norm <= cutoff) {
                     std::cout << it_sd->residue_position << " ";
                     std::cout << it_mp->residue_position << " ";

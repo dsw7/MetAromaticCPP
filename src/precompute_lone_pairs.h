@@ -6,16 +6,7 @@
 #include "structs.h"
 #include "linalg.h"
 
-void debug_preprocessed(std::vector<preprocessed>::iterator inst) {
-    std::cout << inst->residue << " ";
-    std::cout << inst->atom << " ";
-    std::cout << inst->chain << " ";
-    std::cout << inst->residue_position << " ";
-    std::cout << inst->x_coord << " ";
-    std::cout << inst->y_coord << " ";
-    std::cout << inst->z_coord << " ";
-    std::cout << std::endl;
-}
+
 
 void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
     std::vector<float> coord_cg, coord_sd, coord_ce;
@@ -32,10 +23,8 @@ void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
     }
 
     std::vector<float> vector_a, vector_g;
-    subtract_vector(&coord_ce, &coord_sd, &vector_a);
-    subtract_vector(&coord_cg, &coord_sd, &vector_g);
-
-    //debug_preprocessed(it);
+    linalg::vector_subtract(&coord_ce, &coord_sd, &vector_a);
+    linalg::vector_subtract(&coord_cg, &coord_sd, &vector_g);
 }
 
 void get_lone_pairs(std::vector<preprocessed> *met_data) {
@@ -55,13 +44,6 @@ void get_lone_pairs(std::vector<preprocessed> *met_data) {
         }
 
         get_lone_pairs_from_group(&group);
-
-        /*
-        for(unsigned int i = 0; i < group.size(); ++i) {
-        	std::cout << group[i].residue_position << std::endl;
-        }
-        */
-        std::cout << std::endl;
     }
 }
 
