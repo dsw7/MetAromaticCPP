@@ -4,9 +4,7 @@
 #include "structs.h"
 #include "linalg.h"
 
-void apply_distance_condition(std::vector<preprocessed> *met_data,
-                              std::vector<midpoints> *midpoint_data,
-                              float cutoff) {
+void apply_distance_condition(std::vector<preprocessed> *met_data, std::vector<midpoints> *midpoint_data, float cutoff) {
     for (std::vector<preprocessed>::iterator it_sd = met_data->begin(); it_sd != met_data->end(); ++it_sd) {
         if (it_sd->atom == "SD") {
             for (std::vector<midpoints>::iterator it_mp = midpoint_data->begin(); it_mp != midpoint_data->end(); ++it_mp) {
