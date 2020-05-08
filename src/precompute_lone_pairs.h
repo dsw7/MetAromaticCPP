@@ -4,6 +4,7 @@
 #include <iostream>
 #include <set>
 #include "structs.h"
+#include "linalg.h"
 
 void debug_preprocessed(std::vector<preprocessed>::iterator inst) {
     std::cout << inst->residue << " ";
@@ -28,8 +29,13 @@ void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
         else if (it->atom == "CE") {
             coord_cg = {it->x_coord, it->y_coord, it->z_coord};
         }
-        debug_preprocessed(it);
     }
+
+    std::vector<float> vector_a, vector_g;
+    subtract_vector(&coord_ce, &coord_sd, &vector_a);
+    subtract_vector(&coord_cg, &coord_sd, &vector_g);
+
+    //debug_preprocessed(it);
 }
 
 void get_lone_pairs(std::vector<preprocessed> *met_data) {
