@@ -5,6 +5,33 @@
 #include <set>
 #include "structs.h"
 
+void debug_preprocessed(std::vector<preprocessed>::iterator inst) {
+    std::cout << inst->residue << " ";
+    std::cout << inst->atom << " ";
+    std::cout << inst->chain << " ";
+    std::cout << inst->residue_position << " ";
+    std::cout << inst->x_coord << " ";
+    std::cout << inst->y_coord << " ";
+    std::cout << inst->z_coord << " ";
+    std::cout << std::endl;
+}
+
+void get_lone_pairs_from_group(std::vector<preprocessed> *group) {
+    std::vector<float> coord_cg, coord_sd, coord_ce;
+    for (std::vector<preprocessed>::iterator it = group->begin(); it != group->end(); ++it) {
+        if (it->atom == "CG") {
+            coord_ce = {it->x_coord, it->y_coord, it->z_coord};
+        }
+        else if (it->atom == "SD") {
+            coord_sd = {it->x_coord, it->y_coord, it->z_coord};
+        }
+        else if (it->atom == "CE") {
+            coord_cg = {it->x_coord, it->y_coord, it->z_coord};
+        }
+        debug_preprocessed(it);
+    }
+}
+
 void get_lone_pairs(std::vector<preprocessed> *met_data) {
     // get unique residue positions
     std::set<int> residue_positions;
@@ -21,9 +48,13 @@ void get_lone_pairs(std::vector<preprocessed> *met_data) {
             }
         }
 
+        get_lone_pairs_from_group(&group);
+
+        /*
         for(unsigned int i = 0; i < group.size(); ++i) {
         	std::cout << group[i].residue_position << std::endl;
         }
+        */
         std::cout << std::endl;
     }
 }
