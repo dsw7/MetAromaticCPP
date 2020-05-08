@@ -39,9 +39,9 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
 
     // get closely spaced met-aromatics
     // TODO: replace &met_data with &met_lone_pairs here
-    apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
-    apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
-    apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
+    //apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
 
 	return EXIT_SUCCESS;
 }

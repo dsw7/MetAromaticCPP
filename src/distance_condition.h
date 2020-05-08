@@ -1,18 +1,8 @@
 #ifndef CUTOFF_DISTANCE_H
 #define CUTOFF_DISTANCE_H
-#include <cmath>
 #include <iostream>
 #include "structs.h"
-
-
-void norm_vector(std::vector<float> *input_vec, float *norm) {
-    double squares = 0.0;
-    for (std::vector<float>::iterator it = input_vec->begin(); it != input_vec->end(); ++it) {
-        squares += pow(*it, 2);
-    }
-    *norm = pow(squares, 0.5);
-}
-
+#include "linalg.h"
 
 void apply_distance_condition(std::vector<preprocessed> *met_data,
                               std::vector<midpoints> *midpoint_data,
