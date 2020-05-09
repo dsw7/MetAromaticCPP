@@ -13,13 +13,10 @@ struct preprocessed {
 };
 
 struct midpoints {
-	std::string chain; // remove this?
+	std::string chain;
 	std::string residue;	
 	int residue_position;
     std::vector<float> midpoint;
-	//float x_coord;
-	//float y_coord;
-	//float z_coord;
 };
 
 struct lone_pairs {

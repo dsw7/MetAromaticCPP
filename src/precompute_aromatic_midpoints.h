@@ -6,6 +6,8 @@
 #include <algorithm>
 #include "structs.h"
 
+const float SCALAR_HALF = 0.5;
+
 const std::map<std::string, std::string> MAP_ATOMS_PHE = {
     {"CG", "A"},
     {"CD2", "B"},
@@ -44,9 +46,9 @@ void get_hexagon_midpoints(std::vector<preprocessed> *sorted_group, std::vector<
         mp.residue = sorted_group->at(i).residue;
 		mp.residue_position = sorted_group->at(i).residue_position;
         mp.midpoint = {
-            1/2 * ( sorted_group->at(i).x_coord + frameshift[i].x_coord ),
-            1/2 * ( sorted_group->at(i).y_coord + frameshift[i].y_coord ),
-            1/2 * ( sorted_group->at(i).z_coord + frameshift[i].z_coord )
+            SCALAR_HALF * ( sorted_group->at(i).x_coord + frameshift[i].x_coord ),
+            SCALAR_HALF * ( sorted_group->at(i).y_coord + frameshift[i].y_coord ),
+            SCALAR_HALF * ( sorted_group->at(i).z_coord + frameshift[i].z_coord )
         };
 		midpoint_results->push_back(mp);
 	}
