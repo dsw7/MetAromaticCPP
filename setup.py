@@ -4,6 +4,7 @@ from Cython.Distutils import build_ext
 
 CPP_COMPILE_V = '-std=c++17'
 PATH_HEADER_FILES = ['src']
+MACROS = [('DEBUG_PREPROCESSED', 0)]
 
 EXTERNAL_MODULES = [
     Extension(
@@ -12,7 +13,8 @@ EXTERNAL_MODULES = [
         language="c++",
         extra_link_args=["-lcurl"],  # add additional libs to link here
         include_dirs=PATH_HEADER_FILES,
-        extra_compile_args=[CPP_COMPILE_V]
+        extra_compile_args=[CPP_COMPILE_V],
+        define_macros=MACROS
     )
 ]
 

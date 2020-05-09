@@ -27,7 +27,11 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     	return EXIT_FAILURE;
     }
 
+#ifdef DEBUG_PREPROCESSED
+#if DEBUG_PREPROCESSED == 1
     debug_preprocessed(&trp_data);
+#endif
+#endif
 
     // get aromatic residue midpoints
     std::vector<midpoints> phe_midpoints;
