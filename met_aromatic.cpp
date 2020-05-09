@@ -4,7 +4,7 @@
 #include "preprocessing.h"
 #include "precompute_lone_pairs.h"
 #include "precompute_aromatic_midpoints.h"
-#include "distance_condition.h"
+#include "distance_angular.h"
 #include "debug.h"
 
 
@@ -57,6 +57,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     //apply_distance_condition(&met_data, &phe_midpoints, cutoff_distance);
     //apply_distance_condition(&met_data, &tyr_midpoints, cutoff_distance);
     //apply_distance_condition(&met_data, &trp_midpoints, cutoff_distance);
+    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, 90.0);
 
 	return EXIT_SUCCESS;
 }
