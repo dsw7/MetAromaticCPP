@@ -27,10 +27,8 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     	return EXIT_FAILURE;
     }
 
-#ifdef DEBUG_PREPROCESSED
-#if DEBUG_PREPROCESSED == 1
+#if DEBUG_BUILD == 1
     debug_preprocessed(&trp_data);
-#endif
 #endif
 
     // get aromatic residue midpoints
@@ -41,13 +39,17 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
     get_trp_midpoints(&trp_data, &trp_midpoints);
 
+#if DEBUG_BUILD == 1
     debug_midpoints(&trp_midpoints);
+#endif
 
     // get lone pairs
     std::vector<lone_pairs> met_lone_pairs;
  	get_lone_pairs(&met_data, &met_lone_pairs);
 
+#if DEBUG_BUILD == 1
     debug_lone_pairs(&met_lone_pairs);
+#endif
 
     // apply met aromatic conditions here
     // TODO: replace &met_data with &met_lone_pairs here

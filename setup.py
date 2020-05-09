@@ -4,7 +4,9 @@ from Cython.Distutils import build_ext
 
 CPP_COMPILE_V = '-std=c++17'
 PATH_HEADER_FILES = ['src']
-MACROS = [('DEBUG_PREPROCESSED', 0)]
+MACROS = [
+	('DEBUG_BUILD', 0)  # 0 / 1 to compile debug build
+]
 
 EXTERNAL_MODULES = [
     Extension(
