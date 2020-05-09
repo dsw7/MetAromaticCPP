@@ -10,10 +10,6 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs, s
 	    	std::vector<float> vector_v;
 	    	float norm;
             linalg::vector_norm(&vector_v, &norm);
-
-
-	    	//std::cout << it_lone_pairs->residue_position << std::endl;
-	    	//std::cout << it_lone_pairs->residue_position << std::endl;
 	    }
     }
 

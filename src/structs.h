@@ -16,9 +16,10 @@ struct midpoints {
 	std::string chain; // remove this?
 	std::string residue;	
 	int residue_position;
-	float x_coord;
-	float y_coord;
-	float z_coord;
+    std::vector<float> midpoint;
+	//float x_coord;
+	//float y_coord;
+	//float z_coord;
 };
 
 struct lone_pairs {

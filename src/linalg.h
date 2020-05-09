@@ -29,7 +29,7 @@ namespace linalg {
 	}
 
 	void vector_norm(std::vector<float> *input_vec, float *norm) {
-	    double squares = 0.0;
+	    float squares = 0.0;
 	    for (std::vector<float>::iterator it = input_vec->begin(); it != input_vec->end(); ++it) {
 	        squares += pow(*it, 2);
 	    }

@@ -43,9 +43,11 @@ void get_hexagon_midpoints(std::vector<preprocessed> *sorted_group, std::vector<
         mp.chain = sorted_group->at(i).chain;
         mp.residue = sorted_group->at(i).residue;
 		mp.residue_position = sorted_group->at(i).residue_position;
-		mp.x_coord = 0.5 * (sorted_group->at(i).x_coord + frameshift[i].x_coord);
-		mp.y_coord = 0.5 * (sorted_group->at(i).y_coord + frameshift[i].y_coord);
-		mp.z_coord = 0.5 * (sorted_group->at(i).z_coord + frameshift[i].z_coord);
+        mp.midpoint = {
+            0.5 * (sorted_group->at(i).x_coord + frameshift[i].x_coord),
+            0.5 * (sorted_group->at(i).y_coord + frameshift[i].y_coord),
+            0.5 * (sorted_group->at(i).z_coord + frameshift[i].z_coord)
+        };
 		midpoint_results->push_back(mp);
 	}
 }
