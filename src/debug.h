@@ -35,10 +35,7 @@ void debug_midpoints(std::vector<midpoints> *data) {
 	    std::cout << it->residue << " ";
 	    std::cout << it->chain << " ";
 	    std::cout << it->residue_position << " ";
-	    std::cout << it->x_coord << " ";
-	    std::cout << it->y_coord << " ";
-	    std::cout << it->z_coord << " ";
-	    std::cout << std::endl;
+	    print_vector(it->midpoint, "Midpoint coordinates:");
 	}
 	std::cout << std::endl;
 }
