@@ -13,6 +13,9 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs, s
 	    	linalg::vector_subtract(&it_midpoints->midpoint, &it_lone_pairs->coord_sd, &vector_v);
             linalg::vector_norm(&vector_v, &norm_vector_v);
             if (norm_vector_v <= cutoff_distance) {
+
+
+
                 std::cout << it_lone_pairs->residue_position << " ";
                 std::cout << it_midpoints->residue_position << " ";
                 std::cout << it_midpoints->residue << " ";

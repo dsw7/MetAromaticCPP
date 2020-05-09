@@ -52,6 +52,44 @@ namespace linalg {
 			vec_a->at(0) * vec_b->at(1) - vec_a->at(1) * vec_b->at(0)
 		};
 	}
+
+	bool vector_dot_product(std::vector<float> *input_a, std::vector<float> *input_b, float *output) {
+	    unsigned int size_a = input_a->size();
+	    unsigned int size_b = input_b->size();
+
+	    if (size_a != size_b) {
+	        return false;
+	    }
+
+	    float retval = 0.0;
+	    for (unsigned int i = 0; i < size_a; ++i) {
+	        retval += input_a->at(i) * input_b->at(i);
+	    }
+
+	    *output = retval;
+	    return true;
+	}
+
+	bool angle_between_vectors(std::vector<float> *input_a, std::vector<float> *input_b, float *output) {
+	    unsigned int size_a = input_a->size();
+	    unsigned int size_b = input_b->size();
+
+	    if (size_a != size_b) {
+	        return false;
+	    }
+
+	    float dot;
+	    if (!vector_dot_product(input_a, input_b, &dot)) {
+	        return false;
+	    }
+
+	    float norm_a, norm_b;
+	    vector_norm(input_a, &norm_a);
+	    vector_norm(input_b, &norm_b);
+
+	    *output = acos(dot / (norm_a * norm_b));
+	    return true;
+	}
 }
 
 #endif
