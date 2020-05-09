@@ -3,6 +3,8 @@
 #include <cmath>
 #include <vector>
 
+#define PI 3.14159265359
+
 namespace linalg {
 	void vector_scale(std::vector<float> *vec_a, float scalar, std::vector<float> *scaled) {
 	    for (std::vector<float>::iterator it = vec_a->begin(); it != vec_a->end(); ++it) {
@@ -53,7 +55,7 @@ namespace linalg {
 		};
 	}
 
-	bool vector_dot_product(std::vector<float> *input_a, std::vector<float> *input_b, float *output) {
+	bool vector_dot_product(std::vector<float> *input_a, std::vector<float> *input_b, float *dot_product) {
 	    unsigned int size_a = input_a->size();
 	    unsigned int size_b = input_b->size();
 
@@ -66,11 +68,15 @@ namespace linalg {
 	        retval += input_a->at(i) * input_b->at(i);
 	    }
 
-	    *output = retval;
+	    *dot_product = retval;
 	    return true;
 	}
 
-	bool angle_between_vectors(std::vector<float> *input_a, std::vector<float> *input_b, float *output) {
+	float radians_to_degrees(float radian) {
+		return (180.00 / PI) * radian;
+	}
+
+	bool angle_between_vectors(std::vector<float> *input_a, std::vector<float> *input_b, float *angle) {
 	    unsigned int size_a = input_a->size();
 	    unsigned int size_b = input_b->size();
 
@@ -87,7 +93,7 @@ namespace linalg {
 	    vector_norm(input_a, &norm_a);
 	    vector_norm(input_b, &norm_b);
 
-	    *output = acos(dot / (norm_a * norm_b));
+	    *angle = radians_to_degrees(acos(dot / (norm_a * norm_b)));
 	    return true;
 	}
 }
