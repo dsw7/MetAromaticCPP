@@ -52,9 +52,9 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
 #endif
 
     // apply met aromatic conditions here
-    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, 90.0);
-    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, 90.0);
-    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, 90.0);
+    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, 109.5);
+    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, 109.5);
+    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, 109.5);
 
 	return EXIT_SUCCESS;
 }

@@ -55,6 +55,7 @@ namespace linalg {
 		};
 	}
 
+	// returning a bool here might be a bit of over-engineering... at least in this program
 	bool vector_dot_product(std::vector<float> *input_a, std::vector<float> *input_b, float *dot_product) {
 	    unsigned int size_a = input_a->size();
 	    unsigned int size_b = input_b->size();
@@ -76,7 +77,8 @@ namespace linalg {
 		return (180.00 / PI) * radian;
 	}
 
-	bool angle_between_vectors(std::vector<float> *input_a, std::vector<float> *input_b, float *angle) {
+	// returning a bool here might be a bit of over-engineering... at least in this program
+	bool vector_angle(std::vector<float> *input_a, std::vector<float> *input_b, float *angle) {
 	    unsigned int size_a = input_a->size();
 	    unsigned int size_b = input_b->size();
 
