@@ -15,5 +15,4 @@ def test():
 
 
 if __name__ == '__main__':
-	return_value = test()
-	print(return_value)
+	test()
