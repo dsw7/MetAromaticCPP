@@ -3,15 +3,22 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
 CPP_VERSION = '-std=c++17'
+
 PATH_HEADER_FILES = [
     'src'
 ]
+
 MACROS = [
-	('DEBUG_BUILD', 1)  # 0 / 1 to compile debug build
+	('DEBUG_PHE', 0),  # midpoints, preprocessed aromatics
+    ('DEBUG_TYR', 0),  # midpoints, preprocessed aromatics
+    ('DEBUG_TRP', 0),  # midpoints, preprocessed aromatics
+    ('DEBUG_MET', 1),  # lone pairs, preprocessed methionines    
 ]
+
 LINK_LIBRARIES = [
     "-lcurl"
 ]
+
 EXTRA_COMPILE_ARGS = [
     CPP_VERSION
 ]
