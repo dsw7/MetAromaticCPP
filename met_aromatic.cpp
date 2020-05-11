@@ -67,7 +67,12 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance,
     apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, cutoff_angle, &results);
 
     // print results to stdout
-    print_results(&results);
+    if (results.size() > 0) {
+	    print_results(&results);
+    }
+    else {
+        std::cerr << "No Met-aromatic interactions." << std::endl;
+    }
 
 	return EXIT_SUCCESS;
 }
