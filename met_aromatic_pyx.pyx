@@ -1,3 +1,5 @@
+# cython: c_string_type=unicode, c_string_encoding=utf8
+
 from libcpp.string cimport string
 
 cdef extern from "met_aromatic.h":
