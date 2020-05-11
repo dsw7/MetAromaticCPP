@@ -2,10 +2,18 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
-CPP_COMPILE_V = '-std=c++17'
-PATH_HEADER_FILES = ['src']
+CPP_VERSION = '-std=c++17'
+PATH_HEADER_FILES = [
+    'src'
+]
 MACROS = [
 	('DEBUG_BUILD', 1)  # 0 / 1 to compile debug build
+]
+LINK_LIBRARIES = [
+    "-lcurl"
+]
+EXTRA_COMPILE_ARGS = [
+    CPP_VERSION
 ]
 
 EXTERNAL_MODULES = [
@@ -13,10 +21,10 @@ EXTERNAL_MODULES = [
         "met_aromatic",
         ["met_aromatic_pyx.pyx", "met_aromatic.cpp"],
         language="c++",
-        extra_link_args=["-lcurl"],  # add additional libs to link here
         include_dirs=PATH_HEADER_FILES,
-        extra_compile_args=[CPP_COMPILE_V],
-        define_macros=MACROS
+        define_macros=MACROS,
+        extra_link_args=LINK_LIBRARIES,
+        extra_compile_args=EXTRA_COMPILE_ARGS
     )
 ]
 

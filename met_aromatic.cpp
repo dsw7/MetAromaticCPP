@@ -27,7 +27,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     	return EXIT_FAILURE;
     }
 
-#if DEBUG_BUILD == 1
+#if DEBUG_TRP == 1
     debug_preprocessed(&trp_data);
 #endif
 
@@ -39,7 +39,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     get_tyr_midpoints(&tyr_data, &tyr_midpoints);
     get_trp_midpoints(&trp_data, &trp_midpoints);
 
-#if DEBUG_BUILD == 1
+#if DEBUG_TRP == 1
     debug_midpoints(&trp_midpoints);
 #endif
 
@@ -47,7 +47,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
     std::vector<lone_pairs> met_lone_pairs;
  	get_lone_pairs(&met_data, &met_lone_pairs);
 
-#if DEBUG_BUILD == 1
+#if DEBUG_TRP == 1
     debug_lone_pairs(&met_lone_pairs);
 #endif
 
