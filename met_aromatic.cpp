@@ -8,7 +8,7 @@
 #include "debug.h"
 
 
-int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance) {
+int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
     // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
@@ -50,7 +50,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
 #elif DEBUG_TYR == 1
     debug_midpoints(&tyr_midpoints);
 #elif DEBUG_TRP == 1
-    debug_midpoints(&tyr_midpoints);
+    debug_midpoints(&trp_midpoints);
 #endif
 
     // get lone pairs
@@ -63,9 +63,9 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance)
 
     // apply met aromatic conditions here
     // angles do not match Python met-aromatic
-    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, 109.5);
-    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, 109.5);
-    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, 109.5);
+    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, cutoff_angle);
+    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, cutoff_angle);
+    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, cutoff_angle);
 
 	return EXIT_SUCCESS;
 }

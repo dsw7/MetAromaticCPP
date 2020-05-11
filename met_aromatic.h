@@ -6,6 +6,11 @@
 #include <vector>
 #include <iostream>
 
-int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance);
+int met_aromatic_cpp(
+	std::string code,
+	std::string chain,
+	float cutoff_distance,
+	float cutoff_angle
+);
 
 #endif

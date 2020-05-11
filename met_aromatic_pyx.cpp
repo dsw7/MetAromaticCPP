@@ -1047,6 +1047,7 @@ static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_chain[] = "chain";
+static const char __pyx_k_cutoff_angle[] = "cutoff_angle";
 static const char __pyx_k_met_aromatic[] = "met_aromatic";
 static const char __pyx_k_cutoff_distance[] = "cutoff_distance";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1054,22 +1055,23 @@ static const char __pyx_k_met_aromatic_pyx_pyx[] = "met_aromatic_pyx.pyx";
 static PyObject *__pyx_n_s_chain;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_code;
+static PyObject *__pyx_n_s_cutoff_angle;
 static PyObject *__pyx_n_s_cutoff_distance;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_met_aromatic;
 static PyObject *__pyx_kp_s_met_aromatic_pyx_pyx;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance); /* proto */
+static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance, float __pyx_v_cutoff_angle); /* proto */
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
 
 /* "met_aromatic_pyx.pyx":6
- *     int met_aromatic_cpp(string code, string chain, float cutoff_distance)
+ *     int met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance)
+ * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
  */
 
 /* Python wrapper */
@@ -1079,16 +1081,19 @@ static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyO
   std::string __pyx_v_code;
   std::string __pyx_v_chain;
   float __pyx_v_cutoff_distance;
+  float __pyx_v_cutoff_angle;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("met_aromatic (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_code,&__pyx_n_s_chain,&__pyx_n_s_cutoff_distance,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_code,&__pyx_n_s_chain,&__pyx_n_s_cutoff_distance,&__pyx_n_s_cutoff_angle,0};
+    PyObject* values[4] = {0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -1107,45 +1112,53 @@ static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyO
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_chain)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 3, 3, 1); __PYX_ERR(0, 6, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 4, 4, 1); __PYX_ERR(0, 6, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_cutoff_distance)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 3, 3, 2); __PYX_ERR(0, 6, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 4, 4, 2); __PYX_ERR(0, 6, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_cutoff_angle)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 4, 4, 3); __PYX_ERR(0, 6, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "met_aromatic") < 0)) __PYX_ERR(0, 6, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_code = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
     __pyx_v_chain = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
     __pyx_v_cutoff_distance = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_cutoff_distance == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
+    __pyx_v_cutoff_angle = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_cutoff_angle == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 6, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("met_aromatic", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 6, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("met_aromatic.met_aromatic", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_12met_aromatic_met_aromatic(__pyx_self, __pyx_v_code, __pyx_v_chain, __pyx_v_cutoff_distance);
+  __pyx_r = __pyx_pf_12met_aromatic_met_aromatic(__pyx_self, __pyx_v_code, __pyx_v_chain, __pyx_v_cutoff_distance, __pyx_v_cutoff_angle);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance) {
+static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance, float __pyx_v_cutoff_angle) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -1153,21 +1166,21 @@ static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__
 
   /* "met_aromatic_pyx.pyx":7
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance):
- *     return met_aromatic_cpp(code, chain, cutoff_distance)             # <<<<<<<<<<<<<<
+ * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):
+ *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(met_aromatic_cpp(__pyx_v_code, __pyx_v_chain, __pyx_v_cutoff_distance)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(met_aromatic_cpp(__pyx_v_code, __pyx_v_chain, __pyx_v_cutoff_distance, __pyx_v_cutoff_angle)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
   /* "met_aromatic_pyx.pyx":6
- *     int met_aromatic_cpp(string code, string chain, float cutoff_distance)
+ *     int met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance)
+ * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
  */
 
   /* function exit code */
@@ -1292,6 +1305,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_chain, __pyx_k_chain, sizeof(__pyx_k_chain), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_code, __pyx_k_code, sizeof(__pyx_k_code), 0, 0, 1, 1},
+  {&__pyx_n_s_cutoff_angle, __pyx_k_cutoff_angle, sizeof(__pyx_k_cutoff_angle), 0, 0, 1, 1},
   {&__pyx_n_s_cutoff_distance, __pyx_k_cutoff_distance, sizeof(__pyx_k_cutoff_distance), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_met_aromatic, __pyx_k_met_aromatic, sizeof(__pyx_k_met_aromatic), 0, 0, 1, 1},
@@ -1309,15 +1323,15 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "met_aromatic_pyx.pyx":6
- *     int met_aromatic_cpp(string code, string chain, float cutoff_distance)
+ *     int met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance)
+ * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
  */
-  __pyx_tuple_ = PyTuple_Pack(3, __pyx_n_s_code, __pyx_n_s_chain, __pyx_n_s_cutoff_distance); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(4, __pyx_n_s_code, __pyx_n_s_chain, __pyx_n_s_cutoff_distance, __pyx_n_s_cutoff_angle); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_met_aromatic_pyx_pyx, __pyx_n_s_met_aromatic, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_met_aromatic_pyx_pyx, __pyx_n_s_met_aromatic, 6, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -1594,10 +1608,10 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "met_aromatic_pyx.pyx":6
- *     int met_aromatic_cpp(string code, string chain, float cutoff_distance)
+ *     int met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance)
+ * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_12met_aromatic_1met_aromatic, NULL, __pyx_n_s_met_aromatic); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
