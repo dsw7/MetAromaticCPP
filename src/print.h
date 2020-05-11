@@ -6,10 +6,6 @@
 #include <vector>
 #include "structs.h"
 
-void print_stdout(std::string msg) {
-	std::cout << msg << std::endl;
-}
-
 void print_stderr(std::string msg) {
 	std::cerr << msg << std::endl;
 }
