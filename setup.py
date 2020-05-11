@@ -9,10 +9,10 @@ PATH_HEADER_FILES = [
 ]
 
 MACROS = [
-	('DEBUG_PHE', 1),  # midpoints, preprocessed aromatics
+	('DEBUG_PHE', 0),  # midpoints, preprocessed aromatics
     ('DEBUG_TYR', 0),  # midpoints, preprocessed aromatics
     ('DEBUG_TRP', 0),  # midpoints, preprocessed aromatics
-    ('DEBUG_MET', 1),  # lone pairs, preprocessed methionines    
+    ('DEBUG_MET', 0),  # lone pairs, preprocessed methionines    
 ]
 
 LINK_LIBRARIES = [

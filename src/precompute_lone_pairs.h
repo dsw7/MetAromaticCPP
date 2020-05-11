@@ -10,13 +10,13 @@ void get_lone_pairs_from_group(std::vector<preprocessed> *group, int residue_pos
     std::vector<float> coord_cg, coord_sd, coord_ce;
     for (std::vector<preprocessed>::iterator it = group->begin(); it != group->end(); ++it) {
         if (it->atom == "CG") {
-            coord_ce = it->atomic_coords;            
+            coord_cg = it->atomic_coords;            
         }
         else if (it->atom == "SD") {
             coord_sd = it->atomic_coords;            
         }
         else if (it->atom == "CE") {
-            coord_cg = it->atomic_coords;
+            coord_ce = it->atomic_coords;
         }
     }
 

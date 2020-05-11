@@ -49,9 +49,9 @@ namespace linalg {
 
 	void vector_cross_product(std::vector<float> *vec_a, std::vector<float> *vec_b, std::vector<float> *cross) {
 		*cross = {
-			vec_a->at(1) * vec_b->at(2) - vec_a->at(2) * vec_b->at(1),
-			vec_a->at(0) * vec_b->at(2) - vec_a->at(2) * vec_b->at(0),
-			vec_a->at(0) * vec_b->at(1) - vec_a->at(1) * vec_b->at(0)
+			     ((vec_a->at(1) * vec_b->at(2)) - (vec_a->at(2) * vec_b->at(1))),
+			-1 * ((vec_a->at(0) * vec_b->at(2)) - (vec_a->at(2) * vec_b->at(0))),
+			     ((vec_a->at(0) * vec_b->at(1)) - (vec_a->at(1) * vec_b->at(0)))
 		};
 	}
 

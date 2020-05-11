@@ -4,6 +4,7 @@
 #include <iostream>
 #include "structs.h"
 #include "linalg.h"
+#include "debug.h"
 
 void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs, std::vector<midpoints> *aromatic_midpoints, float cutoff_distance, float cutoff_angle) {
     for (std::vector<lone_pairs>::iterator it_lone_pairs = met_lone_pairs->begin(); it_lone_pairs != met_lone_pairs->end(); ++it_lone_pairs) {
@@ -17,12 +18,18 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs, s
                 linalg::vector_angle(&vector_v, &it_lone_pairs->vector_a, &met_theta);
                 linalg::vector_angle(&vector_v, &it_lone_pairs->vector_g, &met_phi);
                 if (met_theta <= cutoff_angle || met_phi <= cutoff_angle) {
+
+                    //print_vector(it_lone_pairs->vector_a, "Vector a:");
+                    //print_vector(it_lone_pairs->vector_g, "Vector g:");
+                    //print_vector(vector_v, "Vector v:");
+
                     std::cout << it_lone_pairs->residue_position << " ";
                     std::cout << it_midpoints->residue_position << " ";
                     std::cout << it_midpoints->residue << " ";
                     std::cout << norm_vector_v << " ";
                     std::cout << met_theta << " ";                    
                     std::cout << met_phi << std::endl;
+                    //std::cout << std::endl;
                 }
             }
 	    }
