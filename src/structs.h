@@ -7,9 +7,7 @@ struct preprocessed {
 	std::string chain;
 	std::string residue;
 	int residue_position;
-	float x_coord;
-	float y_coord;
-	float z_coord;
+	std::vector<float> atomic_coords;
 };
 
 struct midpoints {

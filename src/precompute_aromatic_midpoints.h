@@ -5,6 +5,7 @@
 #include <iostream>
 #include <algorithm>
 #include "structs.h"
+#include "linalg.h"
 
 const float SCALAR_HALF = 0.5;
 
@@ -42,14 +43,13 @@ void get_hexagon_midpoints(std::vector<preprocessed> *sorted_group, std::vector<
 
 	for (unsigned int i = 0; i < sorted_group->size(); i++) {
 		midpoints mp;
+        std::vector<float> vec_mp;
+        std::vector<float> atomic_coords = sorted_group->at(i).atomic_coords;
+        linalg::vector_average(&atomic_coords, &frameshift[i].atomic_coords, &vec_mp);
         mp.chain = sorted_group->at(i).chain;
         mp.residue = sorted_group->at(i).residue;
 		mp.residue_position = sorted_group->at(i).residue_position;
-        mp.midpoint = {
-            SCALAR_HALF * ( sorted_group->at(i).x_coord + frameshift[i].x_coord ),
-            SCALAR_HALF * ( sorted_group->at(i).y_coord + frameshift[i].y_coord ),
-            SCALAR_HALF * ( sorted_group->at(i).z_coord + frameshift[i].z_coord )
-        };
+        mp.midpoint = vec_mp;
 		midpoint_results->push_back(mp);
 	}
 }

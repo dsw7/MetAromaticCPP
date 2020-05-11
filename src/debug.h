@@ -20,10 +20,7 @@ void debug_preprocessed(std::vector<preprocessed> *data) {
 	    std::cout << it->atom << " ";
 	    std::cout << it->chain << " ";
 	    std::cout << it->residue_position << " ";
-	    std::cout << it->x_coord << " ";
-	    std::cout << it->y_coord << " ";
-	    std::cout << it->z_coord << " ";
-	    std::cout << std::endl;
+	    print_vector(it->atomic_coords, "Atomic coordinates:");
 	}
 	std::cout << std::endl;
 }

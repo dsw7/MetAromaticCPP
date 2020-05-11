@@ -31,9 +31,11 @@ preprocessed extract_relevant_data(std::string *line) {
 	map_relevant_data.residue = split_by_whitespace[IDX_RESIDUE];
 	map_relevant_data.chain = split_by_whitespace[IDX_CHAIN];
 	map_relevant_data.residue_position = std::stoi(split_by_whitespace[IDX_RESIDUE_POSITION]);
-	map_relevant_data.x_coord = std::stof(split_by_whitespace[IDX_X_COORD]);
-	map_relevant_data.y_coord = std::stof(split_by_whitespace[IDX_Y_COORD]);
-	map_relevant_data.z_coord = std::stof(split_by_whitespace[IDX_Z_COORD]);
+	map_relevant_data.atomic_coords = {
+		std::stof(split_by_whitespace[IDX_X_COORD]),
+		std::stof(split_by_whitespace[IDX_Y_COORD]),
+		std::stof(split_by_whitespace[IDX_Z_COORD])
+	};
     return map_relevant_data;
 }
 
