@@ -12,7 +12,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance,
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
-        print_stderr("PDB entry does not exist.");
+        std::cerr << "PDB entry does not exist." << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -22,7 +22,7 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance,
     std::vector<preprocessed> tyr_data;
     std::vector<preprocessed> trp_data;
     if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
-        print_stderr("No MET residues or no PHE/TYR/TRP residues.");
+        std::cerr << "No MET residues or no PHE/TYR/TRP residues." << std::endl;
     	return EXIT_FAILURE;
     }
 

@@ -6,10 +6,6 @@
 #include <vector>
 #include "structs.h"
 
-void print_stderr(std::string msg) {
-	std::cerr << msg << std::endl;
-}
-
 void print_results(std::vector<met_aromatic_results> *results) {
     for (std::vector<met_aromatic_results>::iterator it = results->begin(); it != results->end(); ++it) {
         std::cout << it->aromatic_residue << " ";
