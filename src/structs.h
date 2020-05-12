@@ -27,18 +27,18 @@ struct lone_pairs {
 
 struct results_single_interaction {
 	std::string aromatic_residue; 
-	int aromatic_residue_position; 
-	std::string methionine_residue; 
-	int methionine_residue_position; 
+	int aromatic_position; 
+	int methionine_position; 
 	float norm;
-	float met_theta;
-	float met_phi;
+	float met_theta_angle;
+	float met_phi_angle;
 };
 
 struct results_all_interactions {
+	std::string _id;
 	int exit_code;
-	std::string reason;
-	std::vector <results_single_interaction> all_interactions;
+	std::string exit_status;
+	std::vector <results_single_interaction> results;
 };
 
 #endif

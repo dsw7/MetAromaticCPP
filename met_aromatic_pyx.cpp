@@ -1077,6 +1077,7 @@ int __pyx_module_is_main_met_aromatic = 0;
 
 /* Implementation of 'met_aromatic' */
 static PyObject *__pyx_builtin_range;
+static const char __pyx_k_id[] = "_id";
 static const char __pyx_k_code[] = "code";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
@@ -1084,40 +1085,39 @@ static const char __pyx_k_norm[] = "norm";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_chain[] = "chain";
 static const char __pyx_k_range[] = "range";
-static const char __pyx_k_reason[] = "reason";
-static const char __pyx_k_met_phi[] = "met_phi";
+static const char __pyx_k_results[] = "results";
 static const char __pyx_k_exit_code[] = "exit_code";
-static const char __pyx_k_met_theta[] = "met_theta";
+static const char __pyx_k_exit_status[] = "exit_status";
 static const char __pyx_k_cutoff_angle[] = "cutoff_angle";
 static const char __pyx_k_met_aromatic[] = "met_aromatic";
+static const char __pyx_k_met_phi_angle[] = "met_phi_angle";
 static const char __pyx_k_cutoff_distance[] = "cutoff_distance";
-static const char __pyx_k_all_interactions[] = "all_interactions";
+static const char __pyx_k_met_theta_angle[] = "met_theta_angle";
 static const char __pyx_k_aromatic_residue[] = "aromatic_residue";
+static const char __pyx_k_aromatic_position[] = "aromatic_position";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_methionine_residue[] = "methionine_residue";
+static const char __pyx_k_methionine_position[] = "methionine_position";
 static const char __pyx_k_met_aromatic_pyx_pyx[] = "met_aromatic_pyx.pyx";
-static const char __pyx_k_aromatic_residue_position[] = "aromatic_residue_position";
-static const char __pyx_k_methionine_residue_position[] = "methionine_residue_position";
-static PyObject *__pyx_n_s_all_interactions;
+static PyObject *__pyx_n_s_aromatic_position;
 static PyObject *__pyx_n_s_aromatic_residue;
-static PyObject *__pyx_n_s_aromatic_residue_position;
 static PyObject *__pyx_n_s_chain;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_code;
 static PyObject *__pyx_n_s_cutoff_angle;
 static PyObject *__pyx_n_s_cutoff_distance;
 static PyObject *__pyx_n_s_exit_code;
+static PyObject *__pyx_n_s_exit_status;
+static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_met_aromatic;
 static PyObject *__pyx_kp_s_met_aromatic_pyx_pyx;
-static PyObject *__pyx_n_s_met_phi;
-static PyObject *__pyx_n_s_met_theta;
-static PyObject *__pyx_n_s_methionine_residue;
-static PyObject *__pyx_n_s_methionine_residue_position;
+static PyObject *__pyx_n_s_met_phi_angle;
+static PyObject *__pyx_n_s_met_theta_angle;
+static PyObject *__pyx_n_s_methionine_position;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_norm;
 static PyObject *__pyx_n_s_range;
-static PyObject *__pyx_n_s_reason;
+static PyObject *__pyx_n_s_results;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance, float __pyx_v_cutoff_angle); /* proto */
 static PyObject *__pyx_tuple_;
@@ -1655,26 +1655,26 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_n_s_all_interactions, __pyx_k_all_interactions, sizeof(__pyx_k_all_interactions), 0, 0, 1, 1},
+  {&__pyx_n_s_aromatic_position, __pyx_k_aromatic_position, sizeof(__pyx_k_aromatic_position), 0, 0, 1, 1},
   {&__pyx_n_s_aromatic_residue, __pyx_k_aromatic_residue, sizeof(__pyx_k_aromatic_residue), 0, 0, 1, 1},
-  {&__pyx_n_s_aromatic_residue_position, __pyx_k_aromatic_residue_position, sizeof(__pyx_k_aromatic_residue_position), 0, 0, 1, 1},
   {&__pyx_n_s_chain, __pyx_k_chain, sizeof(__pyx_k_chain), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_code, __pyx_k_code, sizeof(__pyx_k_code), 0, 0, 1, 1},
   {&__pyx_n_s_cutoff_angle, __pyx_k_cutoff_angle, sizeof(__pyx_k_cutoff_angle), 0, 0, 1, 1},
   {&__pyx_n_s_cutoff_distance, __pyx_k_cutoff_distance, sizeof(__pyx_k_cutoff_distance), 0, 0, 1, 1},
   {&__pyx_n_s_exit_code, __pyx_k_exit_code, sizeof(__pyx_k_exit_code), 0, 0, 1, 1},
+  {&__pyx_n_s_exit_status, __pyx_k_exit_status, sizeof(__pyx_k_exit_status), 0, 0, 1, 1},
+  {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_met_aromatic, __pyx_k_met_aromatic, sizeof(__pyx_k_met_aromatic), 0, 0, 1, 1},
   {&__pyx_kp_s_met_aromatic_pyx_pyx, __pyx_k_met_aromatic_pyx_pyx, sizeof(__pyx_k_met_aromatic_pyx_pyx), 0, 0, 1, 0},
-  {&__pyx_n_s_met_phi, __pyx_k_met_phi, sizeof(__pyx_k_met_phi), 0, 0, 1, 1},
-  {&__pyx_n_s_met_theta, __pyx_k_met_theta, sizeof(__pyx_k_met_theta), 0, 0, 1, 1},
-  {&__pyx_n_s_methionine_residue, __pyx_k_methionine_residue, sizeof(__pyx_k_methionine_residue), 0, 0, 1, 1},
-  {&__pyx_n_s_methionine_residue_position, __pyx_k_methionine_residue_position, sizeof(__pyx_k_methionine_residue_position), 0, 0, 1, 1},
+  {&__pyx_n_s_met_phi_angle, __pyx_k_met_phi_angle, sizeof(__pyx_k_met_phi_angle), 0, 0, 1, 1},
+  {&__pyx_n_s_met_theta_angle, __pyx_k_met_theta_angle, sizeof(__pyx_k_met_theta_angle), 0, 0, 1, 1},
+  {&__pyx_n_s_methionine_position, __pyx_k_methionine_position, sizeof(__pyx_k_methionine_position), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_norm, __pyx_k_norm, sizeof(__pyx_k_norm), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-  {&__pyx_n_s_reason, __pyx_k_reason, sizeof(__pyx_k_reason), 0, 0, 1, 1},
+  {&__pyx_n_s_results, __pyx_k_results, sizeof(__pyx_k_results), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -2506,27 +2506,24 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
 static PyObject* __pyx_convert__to_py_struct__results_single_interaction(struct results_single_interaction s) {
   PyObject* res;
   PyObject* member;
-  res = __Pyx_PyDict_NewPresized(7); if (unlikely(!res)) return NULL;
+  res = __Pyx_PyDict_NewPresized(6); if (unlikely(!res)) return NULL;
   member = __pyx_convert_PyObject_string_to_py_std__in_string(s.aromatic_residue); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_n_s_aromatic_residue, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __Pyx_PyInt_From_int(s.aromatic_residue_position); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_aromatic_residue_position, member) < 0)) goto bad;
+  member = __Pyx_PyInt_From_int(s.aromatic_position); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_aromatic_position, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __pyx_convert_PyObject_string_to_py_std__in_string(s.methionine_residue); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_methionine_residue, member) < 0)) goto bad;
-  Py_DECREF(member);
-  member = __Pyx_PyInt_From_int(s.methionine_residue_position); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_methionine_residue_position, member) < 0)) goto bad;
+  member = __Pyx_PyInt_From_int(s.methionine_position); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_methionine_position, member) < 0)) goto bad;
   Py_DECREF(member);
   member = PyFloat_FromDouble(s.norm); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_n_s_norm, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = PyFloat_FromDouble(s.met_theta); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_met_theta, member) < 0)) goto bad;
+  member = PyFloat_FromDouble(s.met_theta_angle); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_met_theta_angle, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = PyFloat_FromDouble(s.met_phi); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_met_phi, member) < 0)) goto bad;
+  member = PyFloat_FromDouble(s.met_phi_angle); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_met_phi_angle, member) < 0)) goto bad;
   Py_DECREF(member);
   return res;
   bad:
@@ -2537,15 +2534,18 @@ static PyObject* __pyx_convert__to_py_struct__results_single_interaction(struct 
 static PyObject* __pyx_convert__to_py_struct__results_all_interactions(struct results_all_interactions s) {
   PyObject* res;
   PyObject* member;
-  res = __Pyx_PyDict_NewPresized(3); if (unlikely(!res)) return NULL;
+  res = __Pyx_PyDict_NewPresized(4); if (unlikely(!res)) return NULL;
+  member = __pyx_convert_PyObject_string_to_py_std__in_string(s._id); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_id, member) < 0)) goto bad;
+  Py_DECREF(member);
   member = __Pyx_PyInt_From_int(s.exit_code); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_n_s_exit_code, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __pyx_convert_PyObject_string_to_py_std__in_string(s.reason); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_reason, member) < 0)) goto bad;
+  member = __pyx_convert_PyObject_string_to_py_std__in_string(s.exit_status); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_exit_status, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __pyx_convert_vector_to_py_struct__results_single_interaction(s.all_interactions); if (unlikely(!member)) goto bad;
-  if (unlikely(PyDict_SetItem(res, __pyx_n_s_all_interactions, member) < 0)) goto bad;
+  member = __pyx_convert_vector_to_py_struct__results_single_interaction(s.results); if (unlikely(!member)) goto bad;
+  if (unlikely(PyDict_SetItem(res, __pyx_n_s_results, member) < 0)) goto bad;
   Py_DECREF(member);
   return res;
   bad:

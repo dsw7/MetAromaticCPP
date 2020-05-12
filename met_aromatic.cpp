@@ -1,5 +1,4 @@
 #include "met_aromatic.h"
-#include "print.h"
 #include "curl_pdb_files.h"
 #include "preprocessing.h"
 #include "precompute_lone_pairs.h"
@@ -9,13 +8,14 @@
 
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
+	results._id = code;
 
     // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
     	results.exit_code = EXIT_FAILURE;
-    	results.reason = "PDB entry does not exist.";
+    	results.exit_status = "PDB entry does not exist";
     	return results;
     }
 
@@ -26,7 +26,7 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     std::vector<preprocessed> trp_data;
     if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
     	results.exit_code = EXIT_FAILURE;
-    	results.reason = "No MET residues or no PHE/TYR/TRP residues.";
+    	results.exit_status = "No MET residues or no PHE/TYR/TRP residues";
     	return results;
     }
 
@@ -70,14 +70,14 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
     apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
 
-    // print results to stdout
     if (all_interactions.size() < 1) {
     	results.exit_code = EXIT_FAILURE;
-    	results.reason = "No Met-aromatic interactions.";
+    	results.exit_status = "No Met-aromatic interactions";
     	return results;
     }
 
     results.exit_code = EXIT_SUCCESS;
-    results.all_interactions = all_interactions;
+    results.exit_status = "Success";
+    results.results = all_interactions;
 	return results;
 }

@@ -24,12 +24,11 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs,
                 if (met_theta <= cutoff_angle || met_phi <= cutoff_angle) {
                     results_single_interaction vec_results;
                     vec_results.aromatic_residue = it_midpoints->residue;
-                    vec_results.aromatic_residue_position = it_midpoints->residue_position;
-                    vec_results.methionine_residue = "MET";
-                    vec_results.methionine_residue_position = it_lone_pairs->residue_position;
+                    vec_results.aromatic_position = it_midpoints->residue_position;
+                    vec_results.methionine_position = it_lone_pairs->residue_position;
                     vec_results.norm = norm_vector_v;
-                    vec_results.met_theta = met_theta;
-                    vec_results.met_phi = met_phi;
+                    vec_results.met_theta_angle = met_theta;
+                    vec_results.met_phi_angle = met_phi;
                     results->push_back(vec_results);
                 }
             }
