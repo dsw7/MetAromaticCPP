@@ -10,7 +10,7 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs,
                                       std::vector<midpoints> *aromatic_midpoints,
                                       float cutoff_distance,
                                       float cutoff_angle,
-                                      std::vector<met_aromatic_results> *results) {
+                                      std::vector<results_single_interaction> *results) {
     for (std::vector<lone_pairs>::iterator it_lone_pairs = met_lone_pairs->begin(); it_lone_pairs != met_lone_pairs->end(); ++it_lone_pairs) {
 	    for (std::vector<midpoints>::iterator it_midpoints = aromatic_midpoints->begin(); it_midpoints != aromatic_midpoints->end(); ++it_midpoints) {
 	    	std::vector<float> vector_v;
@@ -22,7 +22,7 @@ void apply_distance_angular_condition(std::vector<lone_pairs> *met_lone_pairs,
                 linalg::vector_angle(&vector_v, &it_lone_pairs->vector_a, &met_theta);
                 linalg::vector_angle(&vector_v, &it_lone_pairs->vector_g, &met_phi);
                 if (met_theta <= cutoff_angle || met_phi <= cutoff_angle) {
-                    met_aromatic_results vec_results;
+                    results_single_interaction vec_results;
                     vec_results.aromatic_residue = it_midpoints->residue;
                     vec_results.aromatic_residue_position = it_midpoints->residue_position;
                     vec_results.methionine_residue = "MET";

@@ -4,8 +4,8 @@
 #include <vector>
 #include "structs.h"
 
-void print_results(std::vector<met_aromatic_results> *results) {
-    for (std::vector<met_aromatic_results>::iterator it = results->begin(); it != results->end(); ++it) {
+void print_results(std::vector<results_single_interaction> *results) {
+    for (std::vector<results_single_interaction>::iterator it = results->begin(); it != results->end(); ++it) {
         std::cout << it->aromatic_residue << " ";
         std::cout << it->aromatic_residue_position << " ";
         std::cout << it->methionine_residue << " ";

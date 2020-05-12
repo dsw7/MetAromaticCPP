@@ -25,7 +25,7 @@ struct lone_pairs {
     int residue_position;
 };
 
-struct met_aromatic_results {
+struct results_single_interaction {
 	std::string aromatic_residue; 
 	int aromatic_residue_position; 
 	std::string methionine_residue; 
@@ -33,6 +33,11 @@ struct met_aromatic_results {
 	float norm;
 	float met_theta;
 	float met_phi;
+};
+
+struct results_all_interactions {
+	int exit_code;
+	std::vector <results_single_interaction> results;
 };
 
 #endif
