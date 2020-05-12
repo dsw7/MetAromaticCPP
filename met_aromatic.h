@@ -1,12 +1,12 @@
 #ifndef MET_AROMATIC_H
 #define MET_AROMATIC_H
 
-#include <map>
 #include <string>
 #include <vector>
 #include <iostream>
+#include "structs.h"
 
-int met_aromatic_cpp(
+std::vector<results_all_interactions> met_aromatic_cpp(
 	std::string code,
 	std::string chain,
 	float cutoff_distance,

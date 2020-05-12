@@ -7,13 +7,16 @@
 #include "distance_angular.h"
 #include "debug.h"
 
-int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
+std::vector<results_all_interactions> met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
+	std::vector<results_all_interactions> results;
+
     // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
-        std::cerr << "PDB entry does not exist." << std::endl;
-        return EXIT_FAILURE;
+    	results.exit_code = EXIT_FAILURE;
+    	results.reason = "PDB entry does not exist.";
+    	return results;
     }
 
 	// isolate only relevant data from pdb file lines
@@ -22,8 +25,9 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance,
     std::vector<preprocessed> tyr_data;
     std::vector<preprocessed> trp_data;
     if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
-        std::cerr << "No MET residues or no PHE/TYR/TRP residues." << std::endl;
-    	return EXIT_FAILURE;
+    	results.exit_code = EXIT_FAILURE;
+    	results.reason = "No MET residues or no PHE/TYR/TRP residues.";
+    	return results;
     }
 
 #if DEBUG_PHE == 1
@@ -61,18 +65,19 @@ int met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance,
 #endif
 
     // apply met aromatic conditions
-    std::vector<results_single_interaction> results;
-    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, cutoff_angle, &results);
-    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, cutoff_angle, &results);
-    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, cutoff_angle, &results);
+    std::vector<results_single_interaction> all_interactions;
+    apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
+    apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
+    apply_distance_angular_condition(&met_lone_pairs, &trp_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
 
     // print results to stdout
-    if (results.size() > 0) {
-	    print_results(&results);
-    }
-    else {
-        std::cerr << "No Met-aromatic interactions." << std::endl;
+    if (all_interactions.size() < 1) {
+    	results.exit_code = EXIT_FAILURE;
+    	results.reason = "No Met-aromatic interactions.";
+    	return results;
     }
 
-	return EXIT_SUCCESS;
+    results.exit_code = EXIT_SUCCESS;
+    results.results = all_interactions;
+	return results;
 }

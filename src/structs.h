@@ -37,7 +37,8 @@ struct results_single_interaction {
 
 struct results_all_interactions {
 	int exit_code;
-	std::vector <results_single_interaction> results;
+	std::string reason;
+	std::vector <results_single_interaction> all_interactions;
 };
 
 #endif
