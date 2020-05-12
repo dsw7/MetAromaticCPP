@@ -1,6 +1,7 @@
 #ifndef GET_AROMATIC_MIDPOINTS_H
 #define GET_AROMATIC_MIDPOINTS_H
 #include <set>
+#include <map>
 #include <vector>
 #include <iostream>
 #include <algorithm>
