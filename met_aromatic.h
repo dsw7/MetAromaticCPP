@@ -6,7 +6,7 @@
 #include <iostream>
 #include "structs.h"
 
-std::vector<results_all_interactions> met_aromatic_cpp(
+results_all_interactions met_aromatic_cpp(
 	std::string code,
 	std::string chain,
 	float cutoff_distance,

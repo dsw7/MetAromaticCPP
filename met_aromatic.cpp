@@ -7,8 +7,8 @@
 #include "distance_angular.h"
 #include "debug.h"
 
-std::vector<results_all_interactions> met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
-	std::vector<results_all_interactions> results;
+results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
+	results_all_interactions results;
 
     // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
@@ -78,6 +78,6 @@ std::vector<results_all_interactions> met_aromatic_cpp(std::string code, std::st
     }
 
     results.exit_code = EXIT_SUCCESS;
-    results.results = all_interactions;
+    results.all_interactions = all_interactions;
 	return results;
 }
