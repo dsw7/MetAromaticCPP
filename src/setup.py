@@ -5,7 +5,7 @@ from Cython.Distutils import build_ext
 CPP_VERSION = '-std=c++17'
 
 PATH_HEADER_FILES = [
-    'src'
+    'include'
 ]
 
 MACROS = [
