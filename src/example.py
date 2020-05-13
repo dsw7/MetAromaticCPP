@@ -1,4 +1,4 @@
-from pprint import pprint
+from json import dumps
 from met_aromatic import met_aromatic
 
 
@@ -7,13 +7,14 @@ def test():
     test_chain = "A"
     test_distance_cutoff = 6.0
     test_angle_cutoff = 109.5
-    return met_aromatic(
-    	test_code.encode(),
-    	test_chain.encode(),
-    	test_distance_cutoff,
-    	test_angle_cutoff
+    results = met_aromatic(
+        test_code.encode(),
+        test_chain.encode(),
+        test_distance_cutoff,
+        test_angle_cutoff
     )
+    return results
 
 
 if __name__ == '__main__':
-	pprint(test())
+    print(dumps(test(), indent=4))
