@@ -2,3 +2,5 @@
 *so
 build/
 opt/
+*pyc
+__pycache__/
