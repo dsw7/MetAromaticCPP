@@ -1,0 +1,38 @@
+{"_id":"1dwl","exception":true,"error_code":9}
+{"_id":"1fnn","exception":true,"error_code":9}
+{"_id":"1oal","exception":true,"error_code":9}
+{"_id":"1ojh","exception":true,"error_code":6}
+{"_id":"1onm","exception":true,"error_code":6}
+{"_id":"1u9y","exception":true,"error_code":9}
+{"_id":"1use","exception":true,"error_code":6}
+{"_id":"1y1s","exception":true,"exception_type":"IndexError('list index out of range',)"}
+{"_id":"2aqt","exception":true,"error_code":9}
+{"_id":"2bw3","exception":true,"error_code":6}
+{"_id":"2dxa","exception":true,"error_code":6}
+{"_id":"2f9k","exception":true,"error_code":6}
+{"_id":"2ho7","exception":true,"error_code":6}
+{"_id":"2i28","exception":true,"error_code":6}
+{"_id":"2m18","exception":true,"error_code":6}
+{"_id":"3a0m","exception":true,"error_code":6}
+{"_id":"3alb","exception":true,"error_code":9}
+{"_id":"3bn4","exception":true,"error_code":9}
+{"_id":"3c7r","exception":true,"error_code":6}
+{"_id":"3dul","exception":true,"error_code":6}
+{"_id":"3fit","exception":true,"error_code":6}
+{"_id":"3q40","exception":true,"error_code":9}
+{"_id":"3u2e","exception":true,"error_code":6}
+{"_id":"3zzv","exception":true,"error_code":9}
+{"_id":"4c1e","exception":true,"error_code":6}
+{"_id":"4j22","exception":true,"exception_type":"IndexError('list index out of range',)"}
+{"_id":"4uwe","exception":true,"exception_type":"ValueError(\"could not convert string to float: '-82.201-134.611'\",)"}
+{"_id":"4xje","exception":true,"error_code":9}
+{"_id":"5ezk","exception":true,"error_code":6}
+{"_id":"5fsz","exception":true,"error_code":6}
+{"_id":"5hod","exception":true,"error_code":9}
+{"_id":"5jw9","exception":true,"error_code":6}
+{"_id":"5l4v","exception":true,"error_code":6}
+{"_id":"5oad","exception":true,"error_code":9}
+{"_id":"5t6j","exception":true,"error_code":6}
+{"_id":"5t9s","exception":true,"error_code":4}
+{"_id":"6b29","exception":true,"error_code":6}
+{"_id":"6byf","exception":true,"error_code":6}
