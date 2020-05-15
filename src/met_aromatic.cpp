@@ -24,10 +24,17 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     std::vector<preprocessed> phe_data;
     std::vector<preprocessed> tyr_data;
     std::vector<preprocessed> trp_data;
-    if (!preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain)) {
-    	results.exit_code = EXIT_FAILURE;
-    	results.exit_status = "No MET residues or no PHE/TYR/TRP residues";
-    	return results;
+    preprocess_data(&raw_data, &met_data, &phe_data, &tyr_data, &trp_data, chain);
+
+    if (met_data.size() == 0) {
+        results.exit_code = EXIT_FAILURE;
+        results.exit_status = "No MET residues";
+        return results;
+    }
+    else if ((phe_data.size() + tyr_data.size() + trp_data.size()) == 0) {
+        results.exit_code = EXIT_FAILURE;
+        results.exit_status = "No PHE/TYR/TRP residues";
+        return results;
     }
 
 #if DEBUG_PHE == 1

@@ -40,7 +40,7 @@ preprocessed extract_relevant_data(std::string *line) {
 }
 
 
-bool preprocess_data(std::string *input,
+void preprocess_data(std::string *input,
 	                 std::vector<preprocessed> *met_data,
 	                 std::vector<preprocessed> *phe_data,
 	                 std::vector<preprocessed> *tyr_data,
@@ -68,6 +68,7 @@ bool preprocess_data(std::string *input,
 	    }
 	}
 
+	/*
 	if (met_data->size() == 0) {
 		return false;
 	}
@@ -75,6 +76,7 @@ bool preprocess_data(std::string *input,
 		return false;
 	}
 	return true;
+	*/
 }
 
 #endif

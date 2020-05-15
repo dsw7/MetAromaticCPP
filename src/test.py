@@ -21,8 +21,8 @@ def test_me(results_control):
     )
 
     if not results_control['exit_status']:
-        exit_status = 'Success'
+        exit_status_control = 'Success'
     else:
-        exit_status = results_control['exit_status']
+        exit_status_control = results_control['exit_status']
 
-    assert results_test['exit_status'] == exit_status
+    assert results_test['exit_status'] == exit_status_control

@@ -3,7 +3,7 @@ from met_aromatic import met_aromatic
 
 
 def test():
-    test_code = "1y1s"
+    test_code = "3lta"
     test_chain = "A"
     test_distance_cutoff = 6.0
     test_angle_cutoff = 109.5
