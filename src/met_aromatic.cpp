@@ -72,7 +72,7 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 
     if (all_interactions.size() < 1) {
     	results.exit_code = EXIT_FAILURE;
-    	results.exit_status = "No Met-aromatic interactions";
+    	results.exit_status = "No interactions";
     	return results;
     }
 
