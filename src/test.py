@@ -12,7 +12,7 @@ TEST_ANGLE_CUTOFF = 109.5
 
 
 @mark.parametrize('results_control', TEST_DATA, ids=TEST_CODES)
-def test_me(results_control):
+def test_met_aromatic(results_control):
     results_test = met_aromatic(
         results_control['_id'].encode(),
         TEST_CHAIN.encode(),
@@ -22,3 +22,19 @@ def test_me(results_control):
 
     assert results_test['exit_status'] == results_control['exit_status']
     assert results_test['exit_code'] == results_control['exit_code']
+
+def test_invalid_pdb_code_exit_code():
+    assert met_aromatic(
+        'abcd'.encode(),
+        TEST_CHAIN.encode(),
+        TEST_DISTANCE_CUTOFF,
+        TEST_ANGLE_CUTOFF
+    )['exit_code'] == 4
+
+def test_invalid_pdb_code_exit_status():
+    assert met_aromatic(
+        'abcd'.encode(),
+        TEST_CHAIN.encode(),
+        TEST_DISTANCE_CUTOFF,
+        TEST_ANGLE_CUTOFF
+    )['exit_status'] == "PDB entry does not exist"
