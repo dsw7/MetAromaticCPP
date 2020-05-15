@@ -1,41 +1,25 @@
+from os import path
 from json import loads
 from pytest import mark
+from met_aromatic import met_aromatic
 
 
-TEST_DATA_NO_EXCEPTIONS = [loads(line) for line in open('test_data_valid_results.json')]
-TEST_DATA_EXCEPTIONS = [loads(line) for line in open('test_data_invalid_results.json')]
+SIZE = 5
+TEST_DATA = [loads(line) for line in open('test_data.json')][0:5]
+TEST_CODES = [entry['_id'] for entry in TEST_DATA]
+TEST_CHAIN = 'A'
+TEST_DISTANCE_CUTOFF = 6.0
+TEST_ANGLE_CUTOFF = 109.5
 
 
-@mark.parametrize(
-    'code',
-    [item['_id'] for item in TEST_DATA_NO_EXCEPTIONS]
-)
-def test_met_aromatic_valid_results(code):
-    test_results = None
-    for entry in TEST_DATA_NO_EXCEPTIONS:
-        if code == entry['_id']:
-            test_results = entry['results']
-        else:
-            pass
+@mark.parametrize('entry', TEST_DATA, ids=TEST_CODES)
+def test_me(entry):
+    test_code = entry['_id']
+    control = met_aromatic(
+        test_code.encode(),
+        TEST_CHAIN.encode(),
+        TEST_DISTANCE_CUTOFF,
+        TEST_ANGLE_CUTOFF
+    )
 
-    if test_results:
-        print(test_results)
-
-    # TODO: add assertion here
-
-@mark.parametrize(
-    'code',
-    [item['_id'] for item in TEST_DATA_EXCEPTIONS]
-)
-def test_met_aromatic_invalid_results(code):
-    test_results = None
-    for entry in TEST_DATA_EXCEPTIONS:
-        if code == entry['_id']:
-            test_results = entry['exception']
-        else:
-            pass
-
-    if test_results:
-        print(test_results)
-
-    # TODO: add assertion here
+    assert control['exit_status'] == entry['exit_status']
