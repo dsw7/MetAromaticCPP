@@ -912,6 +912,54 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 #define __Pyx_PyObject_GetAttrStr(o,n) PyObject_GetAttr(o,n)
 #endif
 
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
+#else
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
+#endif
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#define __Pyx_BUILD_ASSERT_EXPR(cond)\
+    (sizeof(char [1 - 2*!(cond)]) - 1)
+#ifndef Py_MEMBER_SIZE
+#define Py_MEMBER_SIZE(type, member) sizeof(((type *)0)->member)
+#endif
+  static size_t __pyx_pyframe_localsplus_offset = 0;
+  #include "frameobject.h"
+  #define __Pxy_PyFrame_Initialize_Offsets()\
+    ((void)__Pyx_BUILD_ASSERT_EXPR(sizeof(PyFrameObject) == offsetof(PyFrameObject, f_localsplus) + Py_MEMBER_SIZE(PyFrameObject, f_localsplus)),\
+     (void)(__pyx_pyframe_localsplus_offset = ((size_t)PyFrame_Type.tp_basicsize) - Py_MEMBER_SIZE(PyFrameObject, f_localsplus)))
+  #define __Pyx_PyFrame_GetLocalsplus(frame)\
+    (assert(__pyx_pyframe_localsplus_offset), (PyObject **)(((char *)(frame)) + __pyx_pyframe_localsplus_offset))
+#endif
+
+/* PyObjectCall.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw);
+#else
+#define __Pyx_PyObject_Call(func, arg, kw) PyObject_Call(func, arg, kw)
+#endif
+
+/* PyObjectCall2Args.proto */
+static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2);
+
+/* PyObjectCallMethO.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
+#endif
+
+/* PyObjectCallOneArg.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg);
+
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
@@ -1085,6 +1133,8 @@ static const char __pyx_k_norm[] = "norm";
 static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_chain[] = "chain";
 static const char __pyx_k_range[] = "range";
+static const char __pyx_k_utf_8[] = "utf-8";
+static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_results[] = "results";
 static const char __pyx_k_exit_code[] = "exit_code";
 static const char __pyx_k_exit_status[] = "exit_status";
@@ -1105,6 +1155,7 @@ static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_code;
 static PyObject *__pyx_n_s_cutoff_angle;
 static PyObject *__pyx_n_s_cutoff_distance;
+static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_exit_code;
 static PyObject *__pyx_n_s_exit_status;
 static PyObject *__pyx_n_s_id;
@@ -1119,7 +1170,8 @@ static PyObject *__pyx_n_s_norm;
 static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_results;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance, float __pyx_v_cutoff_angle); /* proto */
+static PyObject *__pyx_kp_s_utf_8;
+static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_code, PyObject *__pyx_v_chain, PyObject *__pyx_v_cutoff_distance, PyObject *__pyx_v_cutoff_angle); /* proto */
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_codeobj__2;
 /* Late includes */
@@ -1127,18 +1179,19 @@ static PyObject *__pyx_codeobj__2;
 /* "met_aromatic_pyx.pyx":23
  *     results_all_interactions met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyMethodDef __pyx_mdef_12met_aromatic_1met_aromatic = {"met_aromatic", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12met_aromatic_1met_aromatic, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  std::string __pyx_v_code;
-  std::string __pyx_v_chain;
-  float __pyx_v_cutoff_distance;
-  float __pyx_v_cutoff_angle;
+  PyObject *__pyx_v_code = 0;
+  PyObject *__pyx_v_chain = 0;
+  PyObject *__pyx_v_cutoff_distance = 0;
+  PyObject *__pyx_v_cutoff_angle = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("met_aromatic (wrapper)", 0);
@@ -1195,10 +1248,10 @@ static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyO
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_code = __pyx_convert_string_from_py_std__in_string(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
-    __pyx_v_chain = __pyx_convert_string_from_py_std__in_string(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
-    __pyx_v_cutoff_distance = __pyx_PyFloat_AsFloat(values[2]); if (unlikely((__pyx_v_cutoff_distance == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
-    __pyx_v_cutoff_angle = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_cutoff_angle == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
+    __pyx_v_code = values[0];
+    __pyx_v_chain = values[1];
+    __pyx_v_cutoff_distance = values[2];
+    __pyx_v_cutoff_angle = values[3];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
@@ -1215,19 +1268,106 @@ static PyObject *__pyx_pw_12met_aromatic_1met_aromatic(PyObject *__pyx_self, PyO
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, std::string __pyx_v_code, std::string __pyx_v_chain, float __pyx_v_cutoff_distance, float __pyx_v_cutoff_angle) {
+static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_code, PyObject *__pyx_v_chain, PyObject *__pyx_v_cutoff_distance, PyObject *__pyx_v_cutoff_angle) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  std::string __pyx_t_4;
+  std::string __pyx_t_5;
+  float __pyx_t_6;
+  float __pyx_t_7;
   __Pyx_RefNannySetupContext("met_aromatic", 0);
 
   /* "met_aromatic_pyx.pyx":24
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):
- *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)             # <<<<<<<<<<<<<<
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):
+ *     return met_aromatic_cpp(             # <<<<<<<<<<<<<<
+ *         code.encode('utf-8'),
+ *         chain.encode('utf-8'),
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert__to_py_struct__results_all_interactions(met_aromatic_cpp(__pyx_v_code, __pyx_v_chain, __pyx_v_cutoff_distance, __pyx_v_cutoff_angle)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+
+  /* "met_aromatic_pyx.pyx":25
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),             # <<<<<<<<<<<<<<
+ *         chain.encode('utf-8'),
+ *         cutoff_distance,
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_code, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_kp_s_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_kp_s_utf_8);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "met_aromatic_pyx.pyx":26
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),
+ *         chain.encode('utf-8'),             # <<<<<<<<<<<<<<
+ *         cutoff_distance,
+ *         cutoff_angle
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_chain, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_kp_s_utf_8) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_kp_s_utf_8);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_5 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "met_aromatic_pyx.pyx":27
+ *         code.encode('utf-8'),
+ *         chain.encode('utf-8'),
+ *         cutoff_distance,             # <<<<<<<<<<<<<<
+ *         cutoff_angle
+ *     )
+ */
+  __pyx_t_6 = __pyx_PyFloat_AsFloat(__pyx_v_cutoff_distance); if (unlikely((__pyx_t_6 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
+
+  /* "met_aromatic_pyx.pyx":28
+ *         chain.encode('utf-8'),
+ *         cutoff_distance,
+ *         cutoff_angle             # <<<<<<<<<<<<<<
+ *     )
+ */
+  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_cutoff_angle); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L1_error)
+
+  /* "met_aromatic_pyx.pyx":24
+ * 
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):
+ *     return met_aromatic_cpp(             # <<<<<<<<<<<<<<
+ *         code.encode('utf-8'),
+ *         chain.encode('utf-8'),
+ */
+  __pyx_t_1 = __pyx_convert__to_py_struct__results_all_interactions(met_aromatic_cpp(__pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1236,13 +1376,16 @@ static PyObject *__pyx_pf_12met_aromatic_met_aromatic(CYTHON_UNUSED PyObject *__
   /* "met_aromatic_pyx.pyx":23
  *     results_all_interactions met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_AddTraceback("met_aromatic.met_aromatic", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1662,6 +1805,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_code, __pyx_k_code, sizeof(__pyx_k_code), 0, 0, 1, 1},
   {&__pyx_n_s_cutoff_angle, __pyx_k_cutoff_angle, sizeof(__pyx_k_cutoff_angle), 0, 0, 1, 1},
   {&__pyx_n_s_cutoff_distance, __pyx_k_cutoff_distance, sizeof(__pyx_k_cutoff_distance), 0, 0, 1, 1},
+  {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_exit_code, __pyx_k_exit_code, sizeof(__pyx_k_exit_code), 0, 0, 1, 1},
   {&__pyx_n_s_exit_status, __pyx_k_exit_status, sizeof(__pyx_k_exit_status), 0, 0, 1, 1},
   {&__pyx_n_s_id, __pyx_k_id, sizeof(__pyx_k_id), 0, 0, 1, 1},
@@ -1676,6 +1820,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
   {&__pyx_n_s_results, __pyx_k_results, sizeof(__pyx_k_results), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
+  {&__pyx_kp_s_utf_8, __pyx_k_utf_8, sizeof(__pyx_k_utf_8), 0, 0, 1, 0},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
@@ -1692,8 +1837,9 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "met_aromatic_pyx.pyx":23
  *     results_all_interactions met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),
  */
   __pyx_tuple_ = PyTuple_Pack(4, __pyx_n_s_code, __pyx_n_s_chain, __pyx_n_s_cutoff_distance, __pyx_n_s_cutoff_angle); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
@@ -1977,8 +2123,9 @@ if (!__Pyx_RefNanny) {
   /* "met_aromatic_pyx.pyx":23
  *     results_all_interactions met_aromatic_cpp(string code, string chain, float cutoff_distance, float cutoff_angle)
  * 
- * def met_aromatic(string code, string chain, float cutoff_distance, float cutoff_angle):             # <<<<<<<<<<<<<<
- *     return met_aromatic_cpp(code, chain, cutoff_distance, cutoff_angle)
+ * def met_aromatic(code, chain, cutoff_distance, cutoff_angle):             # <<<<<<<<<<<<<<
+ *     return met_aromatic_cpp(
+ *         code.encode('utf-8'),
  */
   __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_12met_aromatic_1met_aromatic, NULL, __pyx_n_s_met_aromatic); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -2198,6 +2345,257 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
         return tp->tp_getattr(obj, PyString_AS_STRING(attr_name));
 #endif
     return PyObject_GetAttr(obj, attr_name);
+}
+#endif
+
+/* PyCFunctionFastCall */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS | METH_STACKLESS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)(void*)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)(void*)meth)) (self, args, nargs);
+    }
+}
+#endif
+
+/* PyFunctionFastCall */
+#if CYTHON_FAST_PYCALL
+static PyObject* __Pyx_PyFunction_FastCallNoKw(PyCodeObject *co, PyObject **args, Py_ssize_t na,
+                                               PyObject *globals) {
+    PyFrameObject *f;
+    PyThreadState *tstate = __Pyx_PyThreadState_Current;
+    PyObject **fastlocals;
+    Py_ssize_t i;
+    PyObject *result;
+    assert(globals != NULL);
+    /* XXX Perhaps we should create a specialized
+       PyFrame_New() that doesn't take locals, but does
+       take builtins without sanity checking them.
+       */
+    assert(tstate != NULL);
+    f = PyFrame_New(tstate, co, globals, NULL);
+    if (f == NULL) {
+        return NULL;
+    }
+    fastlocals = __Pyx_PyFrame_GetLocalsplus(f);
+    for (i = 0; i < na; i++) {
+        Py_INCREF(*args);
+        fastlocals[i] = *args++;
+    }
+    result = PyEval_EvalFrameEx(f,0);
+    ++tstate->recursion_depth;
+    Py_DECREF(f);
+    --tstate->recursion_depth;
+    return result;
+}
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, Py_ssize_t nargs, PyObject *kwargs) {
+    PyCodeObject *co = (PyCodeObject *)PyFunction_GET_CODE(func);
+    PyObject *globals = PyFunction_GET_GLOBALS(func);
+    PyObject *argdefs = PyFunction_GET_DEFAULTS(func);
+    PyObject *closure;
+#if PY_MAJOR_VERSION >= 3
+    PyObject *kwdefs;
+#endif
+    PyObject *kwtuple, **k;
+    PyObject **d;
+    Py_ssize_t nd;
+    Py_ssize_t nk;
+    PyObject *result;
+    assert(kwargs == NULL || PyDict_Check(kwargs));
+    nk = kwargs ? PyDict_Size(kwargs) : 0;
+    if (Py_EnterRecursiveCall((char*)" while calling a Python object")) {
+        return NULL;
+    }
+    if (
+#if PY_MAJOR_VERSION >= 3
+            co->co_kwonlyargcount == 0 &&
+#endif
+            likely(kwargs == NULL || nk == 0) &&
+            co->co_flags == (CO_OPTIMIZED | CO_NEWLOCALS | CO_NOFREE)) {
+        if (argdefs == NULL && co->co_argcount == nargs) {
+            result = __Pyx_PyFunction_FastCallNoKw(co, args, nargs, globals);
+            goto done;
+        }
+        else if (nargs == 0 && argdefs != NULL
+                 && co->co_argcount == Py_SIZE(argdefs)) {
+            /* function called with no arguments, but all parameters have
+               a default value: use default values as arguments .*/
+            args = &PyTuple_GET_ITEM(argdefs, 0);
+            result =__Pyx_PyFunction_FastCallNoKw(co, args, Py_SIZE(argdefs), globals);
+            goto done;
+        }
+    }
+    if (kwargs != NULL) {
+        Py_ssize_t pos, i;
+        kwtuple = PyTuple_New(2 * nk);
+        if (kwtuple == NULL) {
+            result = NULL;
+            goto done;
+        }
+        k = &PyTuple_GET_ITEM(kwtuple, 0);
+        pos = i = 0;
+        while (PyDict_Next(kwargs, &pos, &k[i], &k[i+1])) {
+            Py_INCREF(k[i]);
+            Py_INCREF(k[i+1]);
+            i += 2;
+        }
+        nk = i / 2;
+    }
+    else {
+        kwtuple = NULL;
+        k = NULL;
+    }
+    closure = PyFunction_GET_CLOSURE(func);
+#if PY_MAJOR_VERSION >= 3
+    kwdefs = PyFunction_GET_KW_DEFAULTS(func);
+#endif
+    if (argdefs != NULL) {
+        d = &PyTuple_GET_ITEM(argdefs, 0);
+        nd = Py_SIZE(argdefs);
+    }
+    else {
+        d = NULL;
+        nd = 0;
+    }
+#if PY_MAJOR_VERSION >= 3
+    result = PyEval_EvalCodeEx((PyObject*)co, globals, (PyObject *)NULL,
+                               args, (int)nargs,
+                               k, (int)nk,
+                               d, (int)nd, kwdefs, closure);
+#else
+    result = PyEval_EvalCodeEx(co, globals, (PyObject *)NULL,
+                               args, (int)nargs,
+                               k, (int)nk,
+                               d, (int)nd, closure);
+#endif
+    Py_XDECREF(kwtuple);
+done:
+    Py_LeaveRecursiveCall();
+    return result;
+}
+#endif
+#endif
+
+/* PyObjectCall */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_Call(PyObject *func, PyObject *arg, PyObject *kw) {
+    PyObject *result;
+    ternaryfunc call = func->ob_type->tp_call;
+    if (unlikely(!call))
+        return PyObject_Call(func, arg, kw);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = (*call)(func, arg, kw);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCall2Args */
+static CYTHON_UNUSED PyObject* __Pyx_PyObject_Call2Args(PyObject* function, PyObject* arg1, PyObject* arg2) {
+    PyObject *args, *result = NULL;
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(function)) {
+        PyObject *args[2] = {arg1, arg2};
+        return __Pyx_PyFunction_FastCall(function, args, 2);
+    }
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(function)) {
+        PyObject *args[2] = {arg1, arg2};
+        return __Pyx_PyCFunction_FastCall(function, args, 2);
+    }
+    #endif
+    args = PyTuple_New(2);
+    if (unlikely(!args)) goto done;
+    Py_INCREF(arg1);
+    PyTuple_SET_ITEM(args, 0, arg1);
+    Py_INCREF(arg2);
+    PyTuple_SET_ITEM(args, 1, arg2);
+    Py_INCREF(function);
+    result = __Pyx_PyObject_Call(function, args, NULL);
+    Py_DECREF(args);
+    Py_DECREF(function);
+done:
+    return result;
+}
+
+/* PyObjectCallMethO */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
+    PyObject *self, *result;
+    PyCFunction cfunc;
+    cfunc = PyCFunction_GET_FUNCTION(func);
+    self = PyCFunction_GET_SELF(func);
+    if (unlikely(Py_EnterRecursiveCall((char*)" while calling a Python object")))
+        return NULL;
+    result = cfunc(self, arg);
+    Py_LeaveRecursiveCall();
+    if (unlikely(!result) && unlikely(!PyErr_Occurred())) {
+        PyErr_SetString(
+            PyExc_SystemError,
+            "NULL result without error in PyObject_Call");
+    }
+    return result;
+}
+#endif
+
+/* PyObjectCallOneArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static PyObject* __Pyx__PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_New(1);
+    if (unlikely(!args)) return NULL;
+    Py_INCREF(arg);
+    PyTuple_SET_ITEM(args, 0, arg);
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, &arg, 1);
+    }
+#endif
+    if (likely(PyCFunction_Check(func))) {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_O)) {
+            return __Pyx_PyObject_CallMethO(func, arg);
+#if CYTHON_FAST_PYCCALL
+        } else if (PyCFunction_GET_FLAGS(func) & METH_FASTCALL) {
+            return __Pyx_PyCFunction_FastCall(func, &arg, 1);
+#endif
+        }
+    }
+    return __Pyx__PyObject_CallOneArg(func, arg);
+}
+#else
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObject *arg) {
+    PyObject *result;
+    PyObject *args = PyTuple_Pack(1, arg);
+    if (unlikely(!args)) return NULL;
+    result = __Pyx_PyObject_Call(func, args, NULL);
+    Py_DECREF(args);
+    return result;
 }
 #endif
 
