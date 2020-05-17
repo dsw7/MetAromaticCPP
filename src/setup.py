@@ -13,7 +13,7 @@ MACROS = [
     ('DEBUG_TYR', 0),   # midpoints, preprocessed aromatics
     ('DEBUG_TRP', 0),   # midpoints, preprocessed aromatics
     ('DEBUG_MET', 0),   # lone pairs, preprocessed methionines
-    ('DEBUG_CURL', 0),  # download    
+    ('DEBUG_CURL', 1),  # download    
 ]
 
 LINK_LIBRARIES = [

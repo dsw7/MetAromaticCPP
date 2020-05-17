@@ -22,15 +22,15 @@ bool download_https_file(std::string filename, std::string *output) {
         curl_easy_setopt(curl, CURLOPT_URL, filename.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_from_curl_to_string);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, output);
-
+#if DEBUG_CURL == 1
+        curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+#endif
         // return CURLE_HTTP_RETURNED_ERROR if we get 404 error due to bad PDB code
         curl_easy_setopt(curl, CURLOPT_FAILONERROR, true);
         res = curl_easy_perform(curl);
-
 #if DEBUG_CURL == 1
         std::cout << "CURLcode: " << res << std::endl;
 #endif
-
         if (res != CURLE_OK) {
             rv = false;
         }
