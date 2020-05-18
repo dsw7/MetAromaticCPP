@@ -52,11 +52,14 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 
 #if DEBUG_PHE == 1
     debug_preprocessed(&phe_data);
-#elif DEBUG_TYR == 1
+#endif
+#if DEBUG_TYR == 1
     debug_preprocessed(&tyr_data);
-#elif DEBUG_TRP == 1
+#endif
+#if DEBUG_TRP == 1
     debug_preprocessed(&trp_data);
-#elif DEBUG_MET == 1
+#endif
+#if DEBUG_MET == 1
     debug_preprocessed(&met_data);
 #endif
 
@@ -70,9 +73,11 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 
 #if DEBUG_PHE == 1
     debug_midpoints(&phe_midpoints);
-#elif DEBUG_TYR == 1
+#endif
+#if DEBUG_TYR == 1
     debug_midpoints(&tyr_midpoints);
-#elif DEBUG_TRP == 1
+#endif
+#if DEBUG_TRP == 1
     debug_midpoints(&trp_midpoints);
 #endif
 
