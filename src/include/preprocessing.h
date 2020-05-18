@@ -11,6 +11,7 @@ const std::string SUB_PATTERN_MET = "ATOM.*(CG|CE|SD)\\s*MET\\s*";
 const std::string SUB_PATTERN_PHE = "ATOM.*(CD1|CE1|CZ|CG|CD2|CE2)\\s*PHE\\s*";
 const std::string SUB_PATTERN_TYR = "ATOM.*(CD1|CE1|CZ|CG|CD2|CE2)\\s*TYR\\s*";
 const std::string SUB_PATTERN_TRP = "ATOM.*(CD2|CE3|CZ2|CH2|CZ3|CE2)\\s*TRP\\s*";
+const std::string SUB_PATTERN_MDL = "ENDMDL";
 const unsigned int IDX_ATOM_DELIMITER = 2;
 const unsigned int IDX_RESIDUE = 3;
 const unsigned int IDX_CHAIN = 4;
@@ -46,15 +47,18 @@ void preprocess_data(std::string *input,
 	                 std::vector<preprocessed> *tyr_data,
 	                 std::vector<preprocessed> *trp_data,
 	                 std::string chain) {
-	// need to break at ENDMDL in the curl stage
 	std::istringstream iss(*input);
 	std::regex pattern_met(SUB_PATTERN_MET + chain);
 	std::regex pattern_phe(SUB_PATTERN_PHE + chain);
 	std::regex pattern_tyr(SUB_PATTERN_TYR + chain);
 	std::regex pattern_trp(SUB_PATTERN_TRP + chain);
+	std::regex pattern_mdl(SUB_PATTERN_MDL);
 
 	for (std::string line; getline(iss, line);) {
-	    if (regex_search(line, pattern_met)) {
+	    if (regex_search(line, pattern_mdl)) {
+	    	break;
+	    }
+	    else if (regex_search(line, pattern_met)) {
 			met_data->push_back(extract_relevant_data(&line));
 	    }
 	    else if (regex_search(line, pattern_phe)) {

@@ -11,9 +11,9 @@ PATH_HEADER_FILES = [
 
 MACROS = [
 	('DEBUG_PHE', 0),   # midpoints, preprocessed aromatics
-    ('DEBUG_TYR', 1),   # midpoints, preprocessed aromatics
-    ('DEBUG_TRP', 1),   # midpoints, preprocessed aromatics
-    ('DEBUG_MET', 1),   # lone pairs, preprocessed methionines
+    ('DEBUG_TYR', 0),   # midpoints, preprocessed aromatics
+    ('DEBUG_TRP', 0),   # midpoints, preprocessed aromatics
+    ('DEBUG_MET', 0),   # lone pairs, preprocessed methionines
     ('DEBUG_CURL', 0),  # download    
 ]
 
