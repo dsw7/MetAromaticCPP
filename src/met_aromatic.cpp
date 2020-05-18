@@ -16,7 +16,7 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
         results.exit_status = "Invalid cutoff distance";
         return results;
     }
-    
+
     if ((cutoff_angle < 0.00) || (cutoff_angle > 360.00)) {
         results.exit_code = exit_codes::invalid_cutoffs_error;
         results.exit_status = "Invalid cutoff angle";
@@ -24,7 +24,7 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     }
 
     // get pdb file from pdb
-    std::string url = "https://files.rcsb.org/download/" + code + ".pdb";
+    std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
     	results.exit_code = exit_codes::invalid_pdb_file_error;
