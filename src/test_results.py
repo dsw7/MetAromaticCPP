@@ -2,7 +2,7 @@ from json import loads
 from pytest import mark
 from met_aromatic import met_aromatic
 
-TEST_DATA = [loads(line) for line in open('test_data.json')][25:60]
+TEST_DATA = [loads(line) for line in open('test_data.json')][0:25]
 TEST_CODES = [entry['_id'] for entry in TEST_DATA]
 TEST_CHAIN = 'A'
 TEST_DISTANCE_CUTOFF = 6.0
