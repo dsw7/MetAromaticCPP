@@ -67,16 +67,6 @@ void preprocess_data(std::string *input,
 			trp_data->push_back(extract_relevant_data(&line));
 	    }
 	}
-
-	/*
-	if (met_data->size() == 0) {
-		return false;
-	}
-	else if ((phe_data->size() + tyr_data->size() + trp_data->size()) == 0) {
-		return false;
-	}
-	return true;
-	*/
 }
 
 #endif
