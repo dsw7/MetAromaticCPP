@@ -66,4 +66,4 @@ def test_invalid_pdb_code_exit_status():
         TEST_CHAIN,
         TEST_DISTANCE_CUTOFF,
         TEST_ANGLE_CUTOFF
-    )['exit_status'] == "PDB entry does not exist"
+    )['exit_status'] == "Invalid PDB file"
