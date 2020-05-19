@@ -83,7 +83,11 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 
     // get lone pairs
     std::vector<lone_pairs> met_lone_pairs;
- 	get_lone_pairs(&met_data, &met_lone_pairs);
+    if (!get_lone_pairs(&met_data, &met_lone_pairs)) {
+        results.exit_code = exit_codes::corrupted_met_data_error;
+        results.exit_status = "Corrupted methionine data";
+        return results; 
+    };
 
 #if DEBUG_MET == 1
     debug_lone_pairs(&met_lone_pairs);

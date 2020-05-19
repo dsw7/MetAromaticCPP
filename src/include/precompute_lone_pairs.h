@@ -31,7 +31,7 @@ void get_lone_pairs_from_group(std::vector<preprocessed> *group, int residue_pos
     lone_pair_results->residue_position = residue_position;
 }
 
-void get_lone_pairs(std::vector<preprocessed> *met_data, std::vector<lone_pairs> *met_lone_pairs) {
+bool get_lone_pairs(std::vector<preprocessed> *met_data, std::vector<lone_pairs> *met_lone_pairs) {
     // get unique residue positions
     std::set<int> residue_positions;
 	for (std::vector<preprocessed>::iterator it = met_data->begin(); it != met_data->end(); ++it) {
@@ -47,11 +47,16 @@ void get_lone_pairs(std::vector<preprocessed> *met_data, std::vector<lone_pairs>
             }
         }
 
+        if (group.size() != 3) {
+            return false;
+        }
+
         // get the lone pairs from the groups
         lone_pairs lone_pair_results;
         get_lone_pairs_from_group(&group, *it_res, &lone_pair_results);
         met_lone_pairs->push_back(lone_pair_results);
     }
+    return true;
 }
 
 #endif

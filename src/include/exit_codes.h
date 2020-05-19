@@ -12,6 +12,7 @@ namespace exit_codes {
     // int bad_vertices_error = 10;
     // int bad_database_collection_error = 11;
     int other_error = 12;
+    int corrupted_met_data_error = 13;
 };
 
 #endif
