@@ -7,6 +7,7 @@
 #include "debug.h"
 #include "exit_codes.h"
 
+
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
 	results._id = code;
@@ -109,4 +110,23 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     results.exit_status = "Success";
     results.results = all_interactions;
 	return results;
+}
+
+#ifndef CXX_CHAIN
+    #define CXX_CHAIN "A"
+#endif
+
+int main() {
+    std::string code = "1rcy";
+    std::string chain = "A";
+
+    results_all_interactions results = met_aromatic_cpp(
+        code,
+        CXX_CHAIN,
+        CXX_CUTOFF_DISTANCE,
+        CXX_CUTOFF_ANGLE
+    );
+
+    std::cout << "Status: " << results.exit_status << std::endl;
+    return results.exit_code;
 }
