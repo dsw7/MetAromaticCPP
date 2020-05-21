@@ -6,6 +6,10 @@
 #include <iostream>
 #include "structs.h"
 
+#ifndef CXX_CHAIN
+    #define CXX_CHAIN "A"
+#endif
+
 results_all_interactions met_aromatic_cpp(
 	std::string code,
 	std::string chain,

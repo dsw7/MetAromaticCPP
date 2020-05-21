@@ -112,13 +112,8 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 	return results;
 }
 
-#ifndef CXX_CHAIN
-    #define CXX_CHAIN "A"
-#endif
-
 int main() {
     std::string code = "1rcy";
-    std::string chain = "A";
 
     results_all_interactions results = met_aromatic_cpp(
         code,
