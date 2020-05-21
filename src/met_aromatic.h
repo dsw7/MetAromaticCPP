@@ -10,6 +10,14 @@
     #define CXX_CHAIN "A"
 #endif
 
+#ifndef CXX_CUTOFF_ANGLE
+    #define CXX_CUTOFF_ANGLE 109.5
+#endif
+
+#ifndef CXX_CUTOFF_DISTANCE
+    #define CXX_CUTOFF_DISTANCE 6.0
+#endif
+
 results_all_interactions met_aromatic_cpp(
 	std::string code,
 	std::string chain,
