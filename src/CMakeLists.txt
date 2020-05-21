@@ -8,7 +8,7 @@ set(CXX_CUTOFF_ANGLE 109.5)
 set(DEBUG_PHE 0)
 set(DEBUG_TYR 0)
 set(DEBUG_TRP 0)
-set(DEBUG_MET 1)
+set(DEBUG_MET 0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CURL_LIBRARY "-lcurl") 
@@ -22,7 +22,7 @@ message(STATUS "Chain: " ${CXX_CHAIN})
 message(STATUS "Cutoff angle: " ${CXX_CUTOFF_ANGLE})
 message(STATUS "Cutoff distance: " ${CXX_CUTOFF_DISTANCE})
 message(STATUS "Debug phenylalanine: " ${DEBUG_PHE})
-message(STATUS "Debug tyroosine: " ${DEBUG_TYR})
+message(STATUS "Debug tyrosine: " ${DEBUG_TYR})
 message(STATUS "Debug tryptophan: " ${DEBUG_TRP})
 message(STATUS "Debug methionine: " ${DEBUG_MET})
 
@@ -36,3 +36,4 @@ add_compile_definitions(DEBUG_MET=${DEBUG_MET})
 add_executable(met_aromatic met_aromatic.cpp)
 
 target_link_libraries(met_aromatic ${CURL_LIBRARIES})
+
