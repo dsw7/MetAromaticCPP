@@ -8,7 +8,6 @@
 #include "exit_codes.h"
 #include "print_results.h"
 
-
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
 	results._id = code;

@@ -9,6 +9,7 @@ set(DEBUG_PHE 0)
 set(DEBUG_TYR 0)
 set(DEBUG_TRP 0)
 set(DEBUG_MET 0)
+set(PRINT_CSV 0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CURL_LIBRARY "-lcurl") 
@@ -25,6 +26,7 @@ message(STATUS "Debug phenylalanine: " ${DEBUG_PHE})
 message(STATUS "Debug tyrosine: " ${DEBUG_TYR})
 message(STATUS "Debug tryptophan: " ${DEBUG_TRP})
 message(STATUS "Debug methionine: " ${DEBUG_MET})
+message(STATUS "Print csv output: " ${PRINT_CSV})
 
 add_compile_definitions(CXX_CUTOFF_DISTANCE=${CXX_CUTOFF_DISTANCE})
 add_compile_definitions(CXX_CUTOFF_ANGLE=${CXX_CUTOFF_ANGLE})
@@ -32,6 +34,7 @@ add_compile_definitions(DEBUG_PHE=${DEBUG_PHE})
 add_compile_definitions(DEBUG_TYR=${DEBUG_TYR})
 add_compile_definitions(DEBUG_TRP=${DEBUG_TRP})
 add_compile_definitions(DEBUG_MET=${DEBUG_MET})
+add_compile_definitions(PRINT_CSV=${PRINT_CSV})
 
 add_executable(met_aromatic met_aromatic.cpp)
 
