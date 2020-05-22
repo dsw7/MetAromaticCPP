@@ -18,6 +18,10 @@
     #define CXX_CUTOFF_DISTANCE 6.0
 #endif
 
+#ifndef PRINT_CSV
+	#define PRINT_CSV 0
+#endif
+
 results_all_interactions met_aromatic_cpp(
 	std::string code,
 	std::string chain,
