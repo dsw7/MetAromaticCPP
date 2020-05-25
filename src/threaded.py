@@ -11,7 +11,7 @@ MAX_WORKERS = 5
 
 class RunParallelJobs:
     def __init__(self, workers):
-        data = [line.strip('\n') for line in open('C:/cygwin64/tmp/random_codes.txt')]
+        data = [line.strip('\n') for line in open('C:/cygwin64/tmp/random_codes_40.txt')]
         self.blocks = array_split(data, workers)
         self.test_chain = "A"
         self.test_distance_cutoff = 6.0
@@ -30,10 +30,9 @@ class RunParallelJobs:
 
     def deploy_jobs(self):
         with futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-
             start_time = time()
             workers = [
-                executor.submit(self.worker, block) for block in self.blocks
+                executor.map(self.worker, block) for block in self.blocks
             ]
 
             if futures.wait(workers, return_when=futures.ALL_COMPLETED):
