@@ -133,6 +133,16 @@ int run_batch_query(std::string path_to_batch_file) {
     return EXIT_SUCCESS;
 }
 
+void print_help() {
+    std::cerr << "Usage: $ ./met_aromatic <--ai|--batch> ";
+    std::cerr << "[code]|[path_to_batch_file, num_threads]" << std::endl;
+}
+
+void invalid_query() {
+    std::cerr << "Invalid query type. ";
+    print_help();
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: $ ./met_aromatic <options>" << std::endl;
@@ -140,15 +150,17 @@ int main(int argc, char *argv[]) {
     }
 
     std::string query_type(argv[1]);
-
-    if (query_type.compare("ai") == 0) {
+    if (query_type.compare("--help") == 0) {
+        print_help();
+    }
+    else if (query_type.compare("--ai") == 0) {
         return run_single_query(argv[2]);
     }
-    else if (query_type.compare("batch") == 0) {
+    else if (query_type.compare("--batch") == 0) {
         return run_batch_query(argv[2]);
     }
     else {
-        std::cerr << "Invalid query type. Usage: $ ./met_aromatic <ai|batch> <...>" << std::endl;
+        invalid_query();
         return EXIT_FAILURE;
     }
 
