@@ -8,7 +8,6 @@
 #include "exit_codes.h"
 #include "print_results.h"
 
-// function is both cythonized and used downstream in cxx code
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
 	results._id = code;
@@ -25,7 +24,6 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
         return results;
     }
 
-    // get pdb file from pdb
     std::string url = "https://files.rcsb.org/download/" + code + ".pdb1";
     std::string raw_data;
     if (!download_https_file(url, &raw_data)) {
@@ -34,7 +32,6 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     	return results;
     }
 
-	// isolate only relevant data from pdb file lines
     std::vector<preprocessed> met_data;
     std::vector<preprocessed> phe_data;
     std::vector<preprocessed> tyr_data;
@@ -65,7 +62,6 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     debug_preprocessed(&met_data);
 #endif
 
-    // get aromatic residue midpoints
     std::vector<midpoints> phe_midpoints;
     std::vector<midpoints> tyr_midpoints;
     std::vector<midpoints> trp_midpoints;
@@ -83,7 +79,6 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     debug_midpoints(&trp_midpoints);
 #endif
 
-    // get lone pairs
     std::vector<lone_pairs> met_lone_pairs;
     if (!get_lone_pairs(&met_data, &met_lone_pairs)) {
         results.exit_code = exit_codes::corrupted_met_data_error;
@@ -95,7 +90,6 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
     debug_lone_pairs(&met_lone_pairs);
 #endif
 
-    // apply met aromatic conditions
     std::vector<results_single_interaction> all_interactions;
     apply_distance_angular_condition(&met_lone_pairs, &phe_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
     apply_distance_angular_condition(&met_lone_pairs, &tyr_midpoints, cutoff_distance, cutoff_angle, &all_interactions);
@@ -113,6 +107,10 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 	return results;
 }
 
+// ***********************************************
+// functions not used in Cython code - only binary
+// ***********************************************
+
 int run_single_query(std::string code) {
     results_all_interactions results = met_aromatic_cpp(
         code,
@@ -129,11 +127,30 @@ int run_single_query(std::string code) {
     return results.exit_code;
 }
 
+int run_batch_query(std::string path_to_batch_file) {
+    // experimental feature
+    std::cout << path_to_batch_file << std::endl;
+    return EXIT_SUCCESS;
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        std::cout << "Usage: $ ./met_aromatic <code>" << std::endl;
+        std::cerr << "Usage: $ ./met_aromatic <options>" << std::endl;
         return EXIT_FAILURE;
     }
 
-    return run_single_query(argv[1]);
+    std::string query_type(argv[1]);
+
+    if (query_type.compare("ai") == 0) {
+        return run_single_query(argv[2]);
+    }
+    else if (query_type.compare("batch") == 0) {
+        return run_batch_query(argv[2]);
+    }
+    else {
+        std::cerr << "Invalid query type. Usage: $ ./met_aromatic <ai|batch> <...>" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return EXIT_SUCCESS;
 }
