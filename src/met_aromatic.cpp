@@ -8,6 +8,7 @@
 #include "exit_codes.h"
 #include "print_results.h"
 
+// function is both cythonized and used downstream in cxx code
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
 	results._id = code;
@@ -112,14 +113,9 @@ results_all_interactions met_aromatic_cpp(std::string code, std::string chain, f
 	return results;
 }
 
-int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        std::cout << "Usage: $ ./met_aromatic <code>" << std::endl;
-        return EXIT_FAILURE;
-    }
-
+int run_single_query(std::string code) {
     results_all_interactions results = met_aromatic_cpp(
-        argv[1],
+        code,
         CXX_CHAIN,
         CXX_CUTOFF_DISTANCE,
         CXX_CUTOFF_ANGLE
@@ -131,4 +127,13 @@ int main(int argc, char *argv[]) {
     print_pretty_results(&results.results);
 #endif
     return results.exit_code;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        std::cout << "Usage: $ ./met_aromatic <code>" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    return run_single_query(argv[1]);
 }
