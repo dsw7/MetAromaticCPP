@@ -1,4 +1,3 @@
-import sys
 from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
@@ -10,19 +9,21 @@ PATH_HEADER_FILES = [
 ]
 
 MACROS = [
-	('DEBUG_PHE', 0),   # midpoints, preprocessed aromatics
+    ('DEBUG_PHE', 0),   # midpoints, preprocessed aromatics
     ('DEBUG_TYR', 0),   # midpoints, preprocessed aromatics
     ('DEBUG_TRP', 0),   # midpoints, preprocessed aromatics
     ('DEBUG_MET', 0),   # lone pairs, preprocessed methionines
-    ('DEBUG_CURL', 0),  # download    
+    ('DEBUG_CURL', 0),  # download
 ]
 
 LINK_LIBRARIES = [
-    "-lcurl"
+    "-lcurl",
+    # "-fopenmp"
 ]
 
 EXTRA_COMPILE_ARGS = [
-    CPP_VERSION
+    CPP_VERSION,
+    # "-fopenmp"
 ]
 
 EXTERNAL_MODULES = [
