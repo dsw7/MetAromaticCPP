@@ -1,6 +1,8 @@
 # MetAromaticCPP
-A Python wrapper over a C++ port of [MetAromatic](https://github.com/dsw7/MetAromatic). I chose to port to C++ for increased performance.  
-Project is in its very early stages - check back soon.
+A small C++/Cython experiment. I ported Python code from [MetAromatic](https://github.com/dsw7/MetAromatic) to C++ with hopes that I could:
+- Compile the Met-aromatic source to a standalone binary and also;
+- Compile the Met-aromatic source to a shared object library that is importable into Python 
+This work was done pretty much only out of personal interest. I don't think any lab staff that are unfamiliar with programming would have any interest in working with Makefiles, etc. 
 
 ## Technical details
 This project currently targets C++17.
