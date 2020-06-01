@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(met_aromatic)
 
 # user defined macro definitions
+# ------------------------------
 set(CXX_CHAIN "A")
 set(CXX_CUTOFF_DISTANCE 6.0)
 set(CXX_CUTOFF_ANGLE 109.5)
@@ -10,6 +11,7 @@ set(DEBUG_TYR 0)
 set(DEBUG_TRP 0)
 set(DEBUG_MET 0)
 set(PRINT_CSV 0)
+# ------------------------------
 
 set(CMAKE_CXX_STANDARD 17)
 set(CURL_LIBRARY "-lcurl") 
