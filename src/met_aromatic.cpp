@@ -128,12 +128,6 @@ int run_single_query(std::string code) {
     return results.exit_code;
 }
 
-int run_batch_query(std::string path_to_batch_file) {
-    // experimental feature
-    std::cout << path_to_batch_file << std::endl;
-    return EXIT_SUCCESS;
-}
-
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: $ ./met_aromatic <options>" << std::endl;
@@ -146,9 +140,6 @@ int main(int argc, char *argv[]) {
     }
     else if (query_type.compare("--ai") == 0) {
         return run_single_query(argv[2]);
-    }
-    else if (query_type.compare("--batch") == 0) {
-        return run_batch_query(argv[2]);
     }
     else {
         invalid_query();

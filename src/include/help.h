@@ -4,12 +4,11 @@
 #include <iostream>
 
 void print_help() {
-    std::cerr << "Usage: $ ./met_aromatic <--ai|--batch> ";
-    std::cerr << "[code]|[path_to_batch_file, num_threads]" << std::endl;
+    std::cerr << "Usage: $ ./met_aromatic --ai <pdb-code>" << std::endl;
 }
 
 void invalid_query() {
-    std::cerr << "Invalid query type. ";
+    std::cerr << "Invalid query. ";
     print_help();
 }
 
