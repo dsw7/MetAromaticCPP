@@ -7,6 +7,7 @@
 #include "debug.h"
 #include "exit_codes.h"
 #include "print_results.h"
+#include "help.h"
 
 results_all_interactions met_aromatic_cpp(std::string code, std::string chain, float cutoff_distance, float cutoff_angle) {
 	results_all_interactions results;
@@ -131,16 +132,6 @@ int run_batch_query(std::string path_to_batch_file) {
     // experimental feature
     std::cout << path_to_batch_file << std::endl;
     return EXIT_SUCCESS;
-}
-
-void print_help() {
-    std::cerr << "Usage: $ ./met_aromatic <--ai|--batch> ";
-    std::cerr << "[code]|[path_to_batch_file, num_threads]" << std::endl;
-}
-
-void invalid_query() {
-    std::cerr << "Invalid query type. ";
-    print_help();
 }
 
 int main(int argc, char *argv[]) {
