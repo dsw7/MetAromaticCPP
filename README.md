@@ -23,7 +23,7 @@ cd src && ./compile_cxx.sh
 ```
 The binary will be dumped into the `bin` directory. To actually run a Met-aromatic calculation using the binary: 
 ```
-cd bin && ./met_aromatic.exe --ai 1rcy
+cd bin && ./met_aromatic.exe --ai <pdb-code>
 ```
 The binary is very simple and takes no other parameters or flags. See the `CMakeLists.txt` file to specify cutoff conditions. The cutoff conditions can be set under the `# user defined macro definitions` section.
 
