@@ -18,12 +18,10 @@ MACROS = [
 
 LINK_LIBRARIES = [
     "-lcurl",
-    # "-fopenmp"
 ]
 
 EXTRA_COMPILE_ARGS = [
     CPP_VERSION,
-    # "-fopenmp"
 ]
 
 EXTERNAL_MODULES = [
