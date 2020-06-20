@@ -30,5 +30,5 @@ The binary is very simple and takes no other parameters or flags. See the `CMake
 ## To run unit tests on Cython wrapper
 I added some unit tests for the shared object library. Here's how to run them:
 ```
-cd src && python -m pytest -vs .
+cd src && ./compile_cython.sh && python -m pytest -vs .
 ```
