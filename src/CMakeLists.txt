@@ -32,6 +32,7 @@ message(STATUS "Print csv output: " ${PRINT_CSV})
 
 add_compile_definitions(CXX_CUTOFF_DISTANCE=${CXX_CUTOFF_DISTANCE})
 add_compile_definitions(CXX_CUTOFF_ANGLE=${CXX_CUTOFF_ANGLE})
+add_compile_definitions(CXX_CHAIN="${CXX_CHAIN}")
 add_compile_definitions(DEBUG_PHE=${DEBUG_PHE})
 add_compile_definitions(DEBUG_TYR=${DEBUG_TYR})
 add_compile_definitions(DEBUG_TRP=${DEBUG_TRP})
