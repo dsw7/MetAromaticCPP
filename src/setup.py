@@ -9,11 +9,11 @@ PATH_HEADER_FILES = [
 ]
 
 MACROS = [
-    ('DEBUG_PHE', 0),   # midpoints, preprocessed aromatics
-    ('DEBUG_TYR', 0),   # midpoints, preprocessed aromatics
-    ('DEBUG_TRP', 0),   # midpoints, preprocessed aromatics
-    ('DEBUG_MET', 0),   # lone pairs, preprocessed methionines
-    ('DEBUG_CURL', 0),  # download
+    ('DEBUG_PHE', 0),       # midpoints, preprocessed aromatics
+    ('DEBUG_TYR', 0),       # midpoints, preprocessed aromatics
+    ('DEBUG_TRP', 0),       # midpoints, preprocessed aromatics
+    ('DEBUG_MET', 0),       # lone pairs, preprocessed methionines
+    ('DEBUG_CURL', 0),      # download
 ]
 
 LINK_LIBRARIES = [
